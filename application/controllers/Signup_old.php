@@ -14,21 +14,39 @@ class Signup extends CI_Controller {
     }
 
     public function index() {
-        $this->load->view('user/signup_view');
+        $this->load->view('signup_view');
     }
 
+    public function mobile() {
+        header("Access-Control-Allow-Origin: *");
+        $this->load->model('Signup_model', 'signup');
+        if (count($this->input->post()) > 0) {
+            $result = $this->signup->create_account($this->input->post());
+            $response = array();
+            if ($result) {
+                $response['status'] = true;
+                $response['result']['user_id'] = $result;
+                $response['result']['msg'] = 'create account is successful';
+                echo json_encode($response);
+            } else {
+                $response['status'] = false;
+                $response['result']['msg'] = 'create account is failed ';
+                echo json_encode($response);
+            }
+        } else {
+            show_404();
+        }
+    }
 
     public function create_account() {
         $this->form_validation->set_rules('firstname', 'Firstname', 'required');
         $this->form_validation->set_rules('lastname', 'Lastname', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
         $this->form_validation->set_rules('passconf', 'Password Confirmation', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required|email');
-        $this->form_validation->set_rules('address', 'Address', 'required');
-        $this->form_validation->set_rules('title', 'Title', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view('user/signup_view');
+            $this->load->view('signup_view');
         } else {
             $this->load->model('Signup_model', 'signup');
             $result = $this->signup->create_account($this->input->post());

@@ -10,10 +10,8 @@ class User extends CI_Controller {
      */
     public function __construct() {
         parent::__construct();
-        header("Access-Control-Allow-Origin: *");
         $this->load->library('user_agent');
-        $this->load->model('User_model', 'user');
-        $this->load->model('Appointment_model', 'appointment');
+        $this->load->model('Seeker_model', 'seeker');
         $this->load->library('form_validation');
     }
 
@@ -21,11 +19,13 @@ class User extends CI_Controller {
 
 
 
-        $data['users'] = $this->user->get();
-        $this->load->view('include/header', $data);
-        $this->load->view('include/sidebar');
-        $this->load->view('user/user_list_view');
-        $this->load->view('include/footer');
+        $data['seeker'] = $this->seeker->get(1)[0];
+        $data['skill'] = $this->seeker->getSkill(1);
+        var_dump($data['skill']);die;
+        $this->load->view('user/partial/header');
+        $this->load->view('user/profile_view', $data);
+        $this->load->view('user/partial/footer');
+
     }
 
     public function add() {

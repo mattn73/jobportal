@@ -91,7 +91,7 @@
                                                                     <a class="english"><img src="<?= base_url() ?>assets/img/flags/gb.png" alt=""> English</a>
                                                                 </li>
                                                                 <li>
-                                                                    <a class="espana"><img src="<?= base_url() ?>assets/img/flags/es.png" alt=""> España</a>
+                                                                    <a class="espana"><img src="<?= base_url() ?>assets/img/flags/es.png" alt=""> Espaï¿½a</a>
                                                                 </li>
                                                                 <li>
                                                                     <a class="russian"><img src="<?= base_url() ?>assets/img/flags/ru.png" alt=""> ???????</a>
