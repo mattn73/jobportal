@@ -4,22 +4,25 @@
         <div class="row">
             <div class="col-md-4 col-xs-12">
                 <div class="white-box">
-<!--                    <div class=" cardbox patient-profile">
-                        <img src="img/patient1.jpg" class="img-responsive" alt="">
-                    </div>-->
+                    <!--                    <div class=" cardbox patient-profile">
+                                            <img src="img/patient1.jpg" class="img-responsive" alt="">
+                                        </div>-->
                     <div class="cardbox">
                         <div class="header">
-                            <h4 class="font-bold">ABOUT COMPANY</h4>
+                            <h4 class="font-bold d-inline">ABOUT COMPANY</h4>
+                            <a class="btn deepPink-bgcolor d-inline pull-right" href="<?=base_url()?>company/edit_profile">
+                                <i class="fa fa-pencil"></i>
+                            </a>
                         </div>
                         <div class="body">
                             <div class="user-btm-box">
                                 <!-- .row -->
                                 <div class="row text-center m-t-10">
                                     <div class="col-lg-6 col-md-12 col-sm-6 col-xs-12 b-r"><strong>Name</strong>
-                                        <p>Pankaj Rai</p>
+                                        <p><?= $profile->name ?></p>
                                     </div>
                                     <div class="col-lg-6 col-md-12 col-sm-6 col-xs-12"><strong>Email</strong>
-                                        <p>Engineer</p>
+                                        <p><?= $profile->email ?></p>
                                     </div>
                                 </div>
                                 <!-- /.row -->
@@ -27,10 +30,10 @@
                                 <!-- .row -->
                                 <div class="row text-center m-t-10">
                                     <div class="col-lg-6 col-md-12 col-sm-6 col-xs-12 b-r"><strong>Contact Name</strong>
-                                        <p>pankaj@gmail.com</p>
+                                        <p><?= $profile->contact_name ?></p>
                                     </div>
                                     <div class="col-lg-6 col-md-12 col-sm-6 col-xs-12"><strong>Contact Email</strong>
-                                        <p>+123 456 789</p>
+                                        <p><?= $profile->contact_email ?></p>
                                     </div>
                                 </div>
                                 <!-- /.row -->
@@ -38,11 +41,11 @@
                                 <!-- .row -->
                                 <div class="row text-center m-t-10">
                                     <div class="col-md-12"><strong>Address</strong>
-                                        <p>345, Sarju Appt., Mota Varacha, Surat
-                                            <br> Gujarat, India.</p>
+                                        <p><?= $profile->address ?></p>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

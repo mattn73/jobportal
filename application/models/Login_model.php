@@ -23,7 +23,8 @@ class Login_model extends CI_Model {
             $row = $query->row();
             $data = array(
                 $type . '_id' => $row->id,
-                'is_logged_in' => true
+                'is_logged_in' => true,
+                'name' => $row->name,
             );
             $this->session->set_userdata($data);
             return true;

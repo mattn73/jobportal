@@ -23,4 +23,17 @@ class Company_model extends CI_Model {
         return false;
     }
 
+    public function update_profile($args) {
+        $company_id = $this->session->userdata('company_id');
+        extract($args);
+        $data = array(
+            'name' => $name,
+            'email' => $email,
+            'contact_name' => $contact_name,
+            'address' => $address
+        );
+        $this->db->where('id', $company_id);
+        return $this->db->update('company', $data);
+    }
+
 }

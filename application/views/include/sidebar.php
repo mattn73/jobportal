@@ -14,132 +14,35 @@
                             <img src="<?= base_url() ?>assets/img/dp.jpg" class="img-circle user-img-circle" alt="User Image" />
                         </div>
                         <div class="pull-left info">
-                            <p> <?php echo $this->session->userdata('title') . '. ' . $this->session->userdata('firstname') ?></p>
+                            <p> <?= $this->session->userdata('name') ?></p>
                             <a href="#"><i class="fa fa-circle user-online"></i><span class="txtOnline"> Online</span></a>
                         </div>
                     </div>
                 </li>
                 <li class="nav-item start active open">
-                    <a href="<?php echo base_url() ?>" class="nav-link nav-toggle">
-                        <i class="material-icons">home</i>
-                        <span class="title">Home</span>
+                    <a href="<?php echo base_url() ?>company/profile" class="nav-link nav-toggle">
+                        <i class="material-icons">business</i>
+                        <span class="title">Profile</span>
                     </a>
                 </li>
-                <?php if ($this->session->userdata('role') == 2) : ?>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link nav-toggle">
-                            <i class="material-icons">dashboard</i>
-                            <span class="title">Tools</span>
-                            <span class="selected"></span>
-                            <span class="arrow open"></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li class="nav-item active open  ">
-                                <a href="<?= base_url() ?>dashboard/heart-diagnosis" class="nav-link ">
-                                    <span class="title">Heart Diagnosis</span>
-                                    <span class="selected"></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                <?php endif; ?>
-                <!--                <li class="nav-item">
-                                    <a href="#" class="nav-link nav-toggle">
-                                        <i class="material-icons">email</i>
-                                        <span class="title">Email</span>
-                                        <span class="arrow"></span>
-                                        <span class="label label-rouded label-menu deepPink-bgcolor">3</span>
-                                    </a>
-                                    <ul class="sub-menu">
-                                        <li class="nav-item  ">
-                                            <a href="<?= base_url() ?>email/inbox" class="nav-link ">
-                                                <span class="title">Inbox</span>
-                                            </a>
-                                        </li>
-                                                                <li class="nav-item  ">
-                                                                    <a href="<?= base_url() ?>email/view" class="nav-link ">
-                                                                        <span class="title">View Mail</span>
-                                                                    </a>
-                                                                </li>
-                                        <li class="nav-item  ">
-                                            <a href="<?= base_url() ?>email/compose" class="nav-link ">
-                                                <span class="title">Compose Mail</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>-->
-                <li class="nav-item  ">
-                    <a href="#" class="nav-link nav-toggle"><i class="material-icons">assignment</i>
-                        <span class="title">Appointments</span><span class="arrow"></span></a>
-                    <ul class="sub-menu">
-                        <li class="nav-item  ">
-                            <a href="<?= base_url() ?>appointment/schedule" class="nav-link "> <span class="title">Doctor Schedule</span>
-                            </a>
-                        </li>
-
-                        <!--                        <li class="nav-item  ">
-                                                    <a href="book_appointment_material.html" class="nav-link "> <span class="title">Book Appointment Material</span>
-                                                    </a>
-                                                </li>-->
-                        <!--                        <li class="nav-item  ">
-                                                    <a href="edit_appointment.html" class="nav-link "> <span class="title">Edit Appointment</span>
-                                                    </a>
-                                                </li>-->
-                        <li class="nav-item  ">
-                            <a href="<?= base_url() ?>appointment/view" class="nav-link "> <span class="title">View All Appointment</span>
-                            </a>
-                        </li>
-                        <?php if ($this->session->userdata('role') == 1) : ?>
-                        <li class="nav-item  ">
-                            <a href="<?= base_url() ?>appointment/risk_assessment" class="nav-link "> <span class="title">Risk assessment</span>
-                            </a>
-                        </li>
-                        <?php endif; ?>
-                        
-                    </ul>
+                <li class="nav-item start">
+                    <a href="<?php echo base_url() ?>company/jobs" class="nav-link nav-toggle">
+                        <i class="material-icons">work_outline</i>
+                        <span class="title">Jobs</span>
+                    </a>
                 </li>
-                <!--                <li class="nav-item  ">
-                                    <a href="#" class="nav-link nav-toggle"> <i class="material-icons">healing</i>
-                                        <span class="title">Doctors</span> <span class="arrow"></span>
-                                    </a>
-                                    <ul class="sub-menu">
-                                        <li class="nav-item  ">
-                                            <a href="<?= base_url() ?>doctor/all" class="nav-link "> <span class="title">All Doctor</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item  ">
-                                            <a href="<?= base_url() ?>doctor/add" class="nav-link "> <span class="title">Add Doctor</span>
-                                            </a>
-                                        </li>
-                                                                <li class="nav-item  ">
-                                                                    <a href="add_doctor_material.html" class="nav-link "> <span class="title">Add Doctor Material</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="nav-item  ">
-                                                                    <a href="<?= base_url() ?>doctor/edit" class="nav-link "> <span class="title">Edit Doctor</span>
-                                                                    </a>
-                                                                </li>
-                                        <li class="nav-item  ">
-                                            <a href="<?= base_url() ?>doctor/profile" class="nav-link "> <span class="title">About Doctor</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>-->
-                <?php if ($this->session->userdata('role') != 1) : ?>
-                    <li class="nav-item  ">
-                        <a href="<?= base_url() ?>patient/view" class="nav-link nav-toggle"> <i class="material-icons">accessible</i>
-                            <span class="title">Patients</span> <span class="arrow"></span>
-                        </a>
-
-                    </li>
-                <?php else: ?>
-                    <li class="nav-item  ">
-                        <a href="<?= base_url() ?>user/view" class="nav-link nav-toggle"> <i class="material-icons">group</i>
-                            <span class="title">Users</span> <span class="arrow"></span>
-                        </a>
-                    </li>
-                <?php endif; ?>
-
+                <li class="nav-item start">
+                    <a href="<?php echo base_url() ?>company/applications" class="nav-link nav-toggle">
+                        <i class="material-icons">file_copy</i>
+                        <span class="title">Applications</span>
+                    </a>
+                </li>
+                <li class="nav-item start">
+                    <a href="<?php echo base_url() ?>company/candidates" class="nav-link nav-toggle">
+                        <i class="material-icons">group</i>
+                        <span class="title">Candidates</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
