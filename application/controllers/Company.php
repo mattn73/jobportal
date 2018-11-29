@@ -56,7 +56,9 @@ class Company extends MY_Controller {
     }
 
     public function jobs() {
-        
+        $data['jobs'] = $this->company->get_jobs();
+        $data['page'] = 'jobs';
+        $this->load->view('template_view', $data);
     }
 
     public function add_job() {

@@ -35,5 +35,16 @@ class Company_model extends CI_Model {
         $this->db->where('id', $company_id);
         return $this->db->update('company', $data);
     }
+    function get_jobs() {
+        $company_id = $this->session->userdata('company_id');
+        $sql = "select * from job where company = ?";
+        $query = $this->db->query($sql, $company_id);
+        // Let's check if there are any results
+        if ($query->num_rows() > 0) {
+            // If there is a user, then create session data
+            return  $query->result();
+        }
+        return false;
+    }
 
 }
