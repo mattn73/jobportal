@@ -20,32 +20,15 @@ class User extends CI_Controller {
 
 
         $data['seeker'] = $this->seeker->get(1)[0];
-        $data['skill'] = $this->seeker->getSkill(1);
-        var_dump($data['skill']);die;
+        $data['skills'] = $this->seeker->getSkill(1);
+        //var_dump($data['skill']);die;
         $this->load->view('user/partial/header');
         $this->load->view('user/profile_view', $data);
         $this->load->view('user/partial/footer');
 
     }
 
-    public function add() {
-        // basic required field
-        $this->form_validation->set_rules('firstname', 'Firstname', 'required');
-        $this->form_validation->set_rules('lastname', 'Lastname', 'required');
-        $this->form_validation->set_rules('phone', 'Phone', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-        $this->form_validation->set_rules('address', 'Address', 'required');
-        $this->form_validation->set_rules('dateofbirth', 'Date of Birth', 'required|callback_compareDate');
-        if ($this->form_validation->run() == FALSE) {
-            $this->load->view('include/header');
-            $this->load->view('include/sidebar');
-            $this->load->view('user/user_add_view');
-            $this->load->view('include/footer');
-        } else {
-            $result = $this->user->add($this->input->post());
-            redirect($this->agent->referrer() . '?status=' . $result);
-        }
-    }
+
 
     public function edit($user_id) {
 
@@ -53,11 +36,11 @@ class User extends CI_Controller {
             $result = $this->user->update($user_id, $this->input->post());
             redirect($this->agent->referrer() . '?status=' . $result);
         } else {
-            $data['user'] = $this->user->get($user_id)[0];
-            $this->load->view('include/header', $data);
-            $this->load->view('include/sidebar');
-            $this->load->view('user/user_edit_view');
-            $this->load->view('include/footer');
+            $data['seeker'] = $this->seeker->get(1)[0];
+            //var_dump($data['skill']);die;
+            $this->load->view('user/partial/header');
+            $this->load->view('user/profile_view', $data);
+            $this->load->view('user/partial/footer');
         }
     }
 

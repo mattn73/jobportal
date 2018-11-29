@@ -49,7 +49,7 @@
                     </tr>
                     </tbody>
                 </table>
-                <a href="#" onClick={props.handleSubmitProfile} class="btn btn-primary ml-2">Edit Profile</a>
+                <a href="/user/edit" class="btn btn-primary ml-2">Edit Profile</a>
             </div>
         </div>
     </div>
@@ -59,22 +59,33 @@
                 <h3 class="card-title">Skill</h3>
                 <table class="table table-user-information ">
                     <tbody>
+
+                    <?php foreach ($skills as $skill): ?>
                     <tr>
-                        <td>web developper</td>
+                        <td><?=$skill->name?></td>
 
                     </tr>
-                    <tr>
-                        <td>Analysis</td>
+
+                    <?php endforeach; ?>
+
+                    <tr id="additional-skill">
 
                     </tr>
-                    <tr>
-                        <td>Reaper</td>
 
-                    </tr>
+
                     </tbody>
                 </table>
-                <a href="#" onClick={props.handleSubmitPass} class="btn btn-primary ml-2">Add Skill</a>
+                <a href="#" onClick="addSkill()" class="btn btn-primary ml-2">Add Skill</a>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+
+    function addSkill() {
+
+        var dummy = '<td>Label: <input name="name" type="text"></td>';
+        $('#additional-skill').innerHTML += dummy;
+    }
+</script>
