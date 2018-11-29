@@ -65,4 +65,22 @@ class Skill_model extends CI_Model
         return false;
     }
 
+    public function remove($user_id, $args)
+    {
+        if ($user_id) {
+
+            $skill_id = $args['skill_id'];
+            $this->db->where('seeker', $user_id);
+            $this->db->where('skill', $skill_id);
+            $this->db->delete('skill_seeker');
+
+
+
+            return true;
+
+        }
+
+        return false;
+    }
+
 }

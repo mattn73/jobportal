@@ -70,7 +70,7 @@ class Seeker_model extends CI_Model
     {
 
         if ($user_id) {
-            $sql = "select s.name "
+            $sql = "select s.name, s.id "
                 . "from seeker j "
                 . "left join skill_seeker sk on j.id = sk.seeker "
                 . "left join skill s on s.id  = sk.skill "

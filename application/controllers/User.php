@@ -33,16 +33,19 @@ class User extends CI_Controller {
 
 
 
-    public function edit($user_id) {
+    public function edit() {
+
+        $user_id = 1;
 
         if ($this->input->post() != null) {
             $result = $this->user->update($user_id, $this->input->post());
             redirect($this->agent->referrer() . '?status=' . $result);
         } else {
-            $data['seeker'] = $this->seeker->get(1)[0];
-            //var_dump($data['skill']);die;
+            $data['seeker'] = $this->seeker->get($user_id)[0];
+            $data['skills'] = $this->seeker->getSkill($user_id);
+            $data['title'] = 'Edit User Profile';
             $this->load->view('user/partial/header');
-            $this->load->view('user/profile_view', $data);
+            $this->load->view('user/profile_edit', $data);
             $this->load->view('user/partial/footer');
         }
     }
@@ -51,10 +54,20 @@ class User extends CI_Controller {
 
 
     public function add_skill() {
-		$user_id = $this->seeker->get(1)[0]->id;
+
+        $user_id = 1;
+		$user_id = $this->seeker->get($user_id)[0]->id;
 		return $this->skill->add($user_id,$this->input->post());
         
     }
+
+    public function remove_skill() {
+        $user_id = 1;
+        $user_id = $this->seeker->get($user_id)[0]->id;
+        return $this->skill->remove($user_id,$this->input->post());
+
+    }
+
 
     public function do_upload()
     {

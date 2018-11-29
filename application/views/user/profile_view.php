@@ -136,33 +136,6 @@
 
 <script>
 
-    function addSkill() {
-
-
-        $('#skill-form').css('display', 'flex');
-    }
-
-
-    $("#skill-form").on('submit', function (e) {
-
-
-        console.log($('#skill-form').serialize());
-
-        $.ajax({
-            type: 'post',
-            url: '/user/add_skill',
-            data: $('#skill-form').serialize(),
-            success: function () {
-
-                location.reload();
-
-            }
-        });
-
-        e.preventDefault();
-
-
-    });
 
 
 </script>

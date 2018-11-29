@@ -16,7 +16,7 @@
 </div>
 
 
-
+<script src="<?= base_url() ?>assets/js/script.js"></script>
 
 <!-- end js include path -->
 </body>
