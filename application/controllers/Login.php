@@ -14,15 +14,32 @@ class Login extends CI_Controller {
         $this->load->model('Login_model', 'login');
     }
 
-    public function index() {
-        $this->load->view('login_view');
+    public function company() {
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        if ($this->form_validation->run() == FALSE) {
+
+            $this->load->view('company/login_view');
+        } else {
+            $result = $this->login->validate('company', $this->input->post());
+            if ($result) {
+                redirect(base_url().'company/');
+            } else {
+                $error = new stdClass();
+                $error->class = 'alert-danger';
+                $error->msg = 'Wrong username or password';
+                $data['error'] = $error;
+                $this->load->view('company/login_view', $data);
+            }
+        }
+    }
+    
+    public function user() {
+        $this->load->view('user/login_view');
     }
 
-    public function external($hash = 0) {
-        //action for login by token
-        header("Access-Control-Allow-Origin: *");
-        $result = $this->login->external($hash);
-        echo json_encode($result);
+    public function company_validate() {
+        
     }
 
     public function validate() {

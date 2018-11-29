@@ -10,23 +10,20 @@ class Login_model extends CI_Model {
         parent::__construct();
     }
 
-    public function validate($args) {
+    public function validate($type,$args) {
         //extract user input into variables
         extract($args);
-        $sql = "select * from user where user.email = ? and user.password = ? and user.role in (1,2) and user.status = 1";
+        $type = filter_var($type, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
+        $sql = "select * from $type where contact_email = ? and password = ?";
         // Run the query
-        $query = $this->db->query($sql, array(strtolower(trim($email)), md5(trim($password))));
+        $query = $this->db->query($sql, array(strtolower(trim($email)), sha1(trim($password))));
         // Let's check if there are any results
         if ($query->num_rows() > 0) {
             // If there is a user, then create session data
             $row = $query->row();
             $data = array(
                 'userid' => $row->id,
-                'firstname' => $row->firstname,
-                'lastname' => $row->lastname,
-                'username' => $row->email,
-                'title' => $row->title,
-                'role' => $row->role,
+                'email' => $row->email,
                 'is_logged_in' => true
             );
             $this->session->set_userdata($data);

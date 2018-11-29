@@ -10,17 +10,15 @@ class Signup_model extends CI_Model {
         parent::__construct();
     }
 
-    public function create_account($args) {
+    public function create_account($type, $args) {
         extract($args);
+        $type = filter_var($type, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
         $data = array(
-            'email' => strtolower($email),
-            'firstname' => $firstname,
-            'lastname' => $lastname,
-            'password' => md5(trim($password)),
-            'role' => 5,
-            'hash' => sha1(strtolower($email))
+            'name' => $company_name,
+            'contact_email' => $contact_email,
+            'password' => sha1(trim($password)),
         );
-        $this->db->insert('user', $data);
+        $this->db->insert($type, $data);
         return $this->db->insert_id();
     }
 

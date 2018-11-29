@@ -5,20 +5,6 @@
 <link rel="stylesheet" href="<?= base_url() ?>assets/material-datetimepicker/bootstrap-material-datetimepicker.css" />
 <div class="page-content-wrapper">
     <div class="page-content">
-        <div class="page-bar">
-            <div class="page-title-breadcrumb">
-                <div class=" pull-left">
-                    <div class="page-title">Add Patient</div>
-                </div>
-                <ol class="breadcrumb page-breadcrumb pull-right">
-                    <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
-                    </li>
-                    <li><a class="parent-item" href="">Doctors</a>&nbsp;<i class="fa fa-angle-right"></i>
-                    </li>
-                    <li class="active">Add Patient</li>
-                </ol>
-            </div>
-        </div>
         <div class="row">
             <div class="col-md-12 col-sm-12">
                 <div class="card card-box">

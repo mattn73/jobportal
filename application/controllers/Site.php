@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Site extends MY_Controller {
+class Site extends CI_Controller {
 
     /**
      * Default controller for the system.
@@ -14,7 +14,7 @@ class Site extends MY_Controller {
 
     public function index() {
         $this->load->view('include/header');
-        $this->load->view('include/sidebar');
+        $this->load->view('site/home_view');
         $this->load->view('include/footer');
     }
 

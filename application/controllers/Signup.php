@@ -38,6 +38,25 @@ class Signup extends CI_Controller {
         }
     }
 
+    public function company() {
+        $this->form_validation->set_rules('company_name', 'Company Name', 'required');
+        $this->form_validation->set_rules('contact_email', 'Email', 'required|valid_email|is_unique[company.contact_email]');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        $this->form_validation->set_rules('passconf', 'Password Confirmation', 'required|matches[password]');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('company/signup_view');
+        } else {
+            $this->load->model('Signup_model', 'signup');
+            $result = $this->signup->create_account('company', $this->input->post());
+            if ($result) {
+                redirect(base_url() . 'login/company');
+            } else {
+                echo 'something went wrong';
+            }
+        }
+    }
+
     public function create_account() {
         $this->form_validation->set_rules('firstname', 'Firstname', 'required');
         $this->form_validation->set_rules('lastname', 'Lastname', 'required');
