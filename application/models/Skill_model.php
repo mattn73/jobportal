@@ -1,38 +1,68 @@
 <?php
 
-class Skill_model extends CI_Model {
+class Skill_model extends CI_Model
+{
 
-/**
- * Model for users
- * @author Rimi <rimi.alfarwan@gmail.com>
- */
-function __construct() {
-	parent::__construct();
-}
+    /**
+     * Model for users
+     * @author Rimi <rimi.alfarwan@gmail.com>
+     */
+    function __construct()
+    {
+        parent::__construct();
+    }
 
- public function add_user_details_external($user_id, $args) {
+    public function add($user_id, $args)
+    {
         extract($args);
-        $data_user = array(
-            'title' => $title,
-            'gender' => $gender,
-            'phone' => $phone,
-            'address' => $address,
-            'birthdate' => $birthdate
-        );
-        $data_user_profile = array(
-            'user' => trim($user_id),
-            'blood_group' => $blood_group,
-            'height' => $height,
-            'weight' => $weight,
-            'is_patient' => $is_patient,
-            'is_veg' => $is_veg
-        );
-        $this->db->where('id', $user_id);
-        if ($this->db->update('user', $data_user)) {
-            $this->db->where('user', $user_id);
-            return $this->db->insert('user_profile', $data_user_profile);
+
+        $this->db->distinct('id');
+        $this->db->select('id');
+        $this->db->like('name', $args['name']);
+        $query = $this->db->get('skill');
+
+        if ($query->num_rows() > 0) {
+            $results = $query->result();
+
+
+            $skill_id = $results[0]->id;
+        } else {
+
+            $skill_data = array(
+                'name' => $args['name'],
+            );
+
+            $this->db->insert('skill', $skill_data);
+            $skill_id = $this->db->insert_id();
+
         }
+
+
+        $this->db->distinct('id');
+        $this->db->select('id');
+        $this->db->where('skill', $skill_id);
+        $this->db->where('seeker', $user_id);
+        $query = $this->db->get('skill_seeker');
+
+        if ($query->num_rows() > 0) {
+
+            return false;
+
+
+        } else {
+
+            $data_skill_user = array(
+                'skill' => $skill_id,
+                'seeker' => $user_id
+            );
+
+            $this->db->insert('skill_seeker', $data_skill_user);
+            return true;
+
+        }
+
+
         return false;
-	}
-	
+    }
+
 }

@@ -16,10 +16,6 @@
 </div>
 
 
-<!-- start js include path -->
-<script src="<?= base_url() ?>assets/js/jquery.min.js"></script>
-<!-- bootstrap -->
-<script src="<?= base_url() ?>assets/bootstrap/js/bootstrap.min.js"></script>
 
 
 <!-- end js include path -->

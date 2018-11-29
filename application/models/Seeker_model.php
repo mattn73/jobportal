@@ -41,12 +41,27 @@ class Seeker_model extends CI_Model
                 . "where seeker.id = ?";
             // Run the query
             $query = $this->db->query($sql, $user_id);
-       }
+        }
         // Let's check if there are any results
         if ($query->num_rows() > 0) {
             // If there is a user, then create session data
             $results = $query->result();
             return $results;
+        }
+        return false;
+    }
+
+    public function updateCvStatus($user_id = 0, $path)
+    {
+
+        if ($user_id) {
+
+
+            $this->db->set('cv', 1);
+            $this->db->set('cv_path', $path);
+            $this->db->where('id', $user_id);
+            $this->db->update('seeker');
+            return true;
         }
         return false;
     }
@@ -57,8 +72,8 @@ class Seeker_model extends CI_Model
         if ($user_id) {
             $sql = "select s.name "
                 . "from seeker j "
-                ."left join skill_seeker sk on j.id = sk.seeker "
-                ."left join skill s on s.id  = sk.skill "
+                . "left join skill_seeker sk on j.id = sk.seeker "
+                . "left join skill s on s.id  = sk.skill "
                 . "where j.id = ?";
             // Run the query
             $query = $this->db->query($sql, $user_id);

@@ -1,5 +1,5 @@
 <div class="row">
-<?php //echo ucfirst($seeker->title);die;?>
+    <?php //echo ucfirst($seeker->title);die;?>
     <div class="col-md-8  offset-md-0  toppad">
         <div class="card">
             <div class="card-body">
@@ -12,39 +12,50 @@
                     </tr>
                     <tr>
                         <td>Firstname:</td>
-                        <td><?=$seeker->firstname?></td>
+                        <td><?= $seeker->firstname ?></td>
                     </tr>
                     <tr>
                         <td>lastname:</td>
-                        <td><?=$seeker->lastname?></td>
+                        <td><?= $seeker->lastname ?></td>
                     </tr>
 
                     <tr>
                         <td>email:</td>
-                        <td><?=$seeker->email?></td>
+                        <td><?= $seeker->email ?></td>
                     </tr>
                     <tr>
                         <td>Postal Address:</td>
-                        <td id="profile-address"><?=$seeker->postal_address?></td>
+                        <td id="profile-address"><?= $seeker->postal_address ?></td>
                     </tr>
 
                     <tr>
                         <td>contact Number:</td>
                         <td>
-                            <?=$seeker->mobile?>
+                            <?= $seeker->mobile ?>
                         </td>
                     </tr>
                     <tr>
                         <td>Date of Birth</td>
                         <td>
-                            <?=$seeker->dob?>
+                            <?= $seeker->dob ?>
                         </td>
                     </tr>
                     <tr>
 
                         <td>Highest Qualification Achieved</td>
                         <td>
-                            <?=$seeker->hqa?>
+                            <?= $seeker->hqa ?>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>CV Attached</td>
+                        <td>
+                            <?php if ($seeker->cv == 0): ?>
+                                No
+                            <?php elseif ($seeker->cv == 1): ?>
+                                Yes
+                            <?php endif; ?>
                         </td>
                     </tr>
                     </tbody>
@@ -61,13 +72,23 @@
                     <tbody>
 
                     <?php foreach ($skills as $skill): ?>
-                    <tr>
-                        <td><?=$skill->name?></td>
+                        <tr>
+                            <td><?= $skill->name ?></td>
 
-                    </tr>
+                        </tr>
 
                     <?php endforeach; ?>
 
+                    <tr>
+                        <td>
+                            <form id="skill-form" class="skill-form form-inline" style="display: none">
+                                <div class="form-group"><input type="text" name="name" class="form-control add-skill"
+                                                               id="add-skill"></div>
+                                <button type="submit" class="btn btn-primary ml-2">Add</button>
+                            </form>
+
+                        </td>
+                    </tr>
 
                     </tbody>
                 </table>
@@ -75,34 +96,73 @@
             </div>
         </div>
     </div>
+    <div class="col-md-8  offset-md-0  toppad">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">CV</h3>
+                <table id="profile-skill" class="table table-user-information ">
+                    <tbody>
+
+
+                    <tr>
+                        <td>
+                            <?php if (isset($error)): ?>
+                                <?php echo $error; ?>
+                            <?php endif; ?>
+                            <?php echo form_open_multipart('/user/do_upload' , array('class' => 'form-inline')); ?>
+                            <div class="form-group"><input type="file" name="cv" size="40"/></div>
+                            <button type="submit" class="btn btn-primary ml-2">Add</button>
+                            </form>
+
+                        </td>
+
+
+                    </tr>
+                    <?php if (isset($upload_data)): ?>
+                        <tr>
+                            <td>
+                                File uploaded
+                            </td>
+                        </tr>
+                    <?php endif; ?>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
 </div>
+
 
 <script>
 
     function addSkill() {
 
-        var dummy = '<tr><td><form class="skill-form form-inline" action="/action_page.php"><div class="form-group"><input type="text" name="name" class="form-control add-skill" id="add-skill"></div><button type="submit" class="btn btn-default">Add</button></form></td></tr>';
-        $('#profile-skill').append(dummy);
+
+        $('#skill-form').css('display', 'flex');
     }
 
 
-	 $(function () {
+    $("#skill-form").on('submit', function (e) {
 
-        $('skill-form').on('submit', function (e) {
 
-          e.preventDefault();
+        console.log($('#skill-form').serialize());
 
-          $.ajax({
+        $.ajax({
             type: 'post',
-            url: 'user/add_skill',
-            data: this.serialize(),
+            url: '/user/add_skill',
+            data: $('#skill-form').serialize(),
             success: function () {
-              alert('skillAdd');
-			  
-            }
-          });
 
+                location.reload();
+
+            }
         });
 
-      });
+        e.preventDefault();
+
+
+    });
+
+
 </script>

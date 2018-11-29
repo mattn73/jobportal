@@ -27,14 +27,14 @@
     <link rel="shortcut icon" href="<?= base_url() ?>assets/img/favicon.ico"/>
     <!-- start js include path -->
 
+
+    <!-- start js include path -->
     <script src="<?= base_url() ?>assets/js/jquery.min.js"></script>
-    <script src="<?= base_url() ?>assets/js/jquery-migrate-3.0.0.min.js"></script>
-    <script src="<?= base_url() ?>assets/js/popper/popper.js"></script>
-    <script src="<?= base_url() ?>assets/js/jquery.blockui.min.js"></script>
-    <script src="<?= base_url() ?>assets/js/jquery.slimscroll.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>
+
     <!-- bootstrap -->
     <script src="<?= base_url() ?>assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="<?= base_url() ?>assets/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+
 </head>
 <!-- END HEAD -->
 <body>
