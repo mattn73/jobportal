@@ -12,6 +12,7 @@ class User extends CI_Controller {
         parent::__construct();
         $this->load->library('user_agent');
         $this->load->model('Seeker_model', 'seeker');
+        $this->load->model('Skill_model', 'skill');
         $this->load->library('form_validation');
     }
 
@@ -21,8 +22,9 @@ class User extends CI_Controller {
 
         $data['seeker'] = $this->seeker->get(1)[0];
         $data['skills'] = $this->seeker->getSkill(1);
+        $data['title'] = 'User Profile';
         //var_dump($data['skill']);die;
-        $this->load->view('user/partial/header');
+        $this->load->view('user/partial/header', $data);
         $this->load->view('user/profile_view', $data);
         $this->load->view('user/partial/footer');
 
@@ -82,61 +84,12 @@ class User extends CI_Controller {
         }
     }
 
-    public function edit_external($user_id) {
-        $result = $this->update_user_external($user_id, $this->input->post());
-        return $result;
+
+    public function add_skill() {
+		$user_id = $this->seeker->get(1)[0]->id;
+		return $this->skill->add($user_id,$this->input->post());
+        
     }
 
-    public function add_external($user_id) {
-        return $this->user->add_user_details_external($user_id, $this->input->post());
-    }
-
-    public function add_user($args) {
-        return $this->user->add_user($args);
-    }
-
-    public function update_user($user_id, $args) {
-        return $this->user->update_user($user_id, $args);
-    }
-
-    public function update_user_external($user_id, $args) {
-        echo $this->user->update_user_external($user_id, $args);
-    }
-
-    public function update_profile($user_id, $args) {
-        return $this->user->update_profile($user_id, $args);
-    }
-
-    public function delete_user($user_id) {
-        return $this->user->delete_user($user_id);
-    }
-
-    public function add_user_record($user_id) {
-
-        return $this->user->add_user_record($user_id, $this->input->post());
-    }
-
-    public function get_patients() {
-
-        echo json_encode($this->user->get_patients());
-    }
-
-    public function get_doctors() {
-
-        echo json_encode($this->user->get_doctors());
-    }
-
-    function compareDate() {
-
-        $selected_date = strtotime($_POST['dateofbirth']);
-        $today = strtotime(date('Y-m-d'));
-
-        if ($selected_date <= $today)
-            return True;
-        else {
-            $this->form_validation->set_message('compareDate', '%s should be less than today.');
-            return False;
-        }
-    }
 
 }

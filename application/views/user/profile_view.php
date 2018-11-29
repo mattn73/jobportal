@@ -57,7 +57,7 @@
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title">Skill</h3>
-                <table class="table table-user-information ">
+                <table id="profile-skill" class="table table-user-information ">
                     <tbody>
 
                     <?php foreach ($skills as $skill): ?>
@@ -67,10 +67,6 @@
                     </tr>
 
                     <?php endforeach; ?>
-
-                    <tr id="additional-skill">
-
-                    </tr>
 
 
                     </tbody>
@@ -85,7 +81,28 @@
 
     function addSkill() {
 
-        var dummy = '<td>Label: <input name="name" type="text"></td>';
-        $('#additional-skill').innerHTML += dummy;
+        var dummy = '<tr><td><form class="skill-form form-inline" action="/action_page.php"><div class="form-group"><input type="text" name="name" class="form-control add-skill" id="add-skill"></div><button type="submit" class="btn btn-default">Add</button></form></td></tr>';
+        $('#profile-skill').append(dummy);
     }
+
+
+	 $(function () {
+
+        $('skill-form').on('submit', function (e) {
+
+          e.preventDefault();
+
+          $.ajax({
+            type: 'post',
+            url: 'user/add_skill',
+            data: this.serialize(),
+            success: function () {
+              alert('skillAdd');
+			  
+            }
+          });
+
+        });
+
+      });
 </script>
