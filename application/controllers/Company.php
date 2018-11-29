@@ -13,22 +13,34 @@ class Company extends MY_Controller {
         $this->load->model('Company_model', 'company');
         $this->load->library('form_validation');
     }
-    public function profile(){
+
+    public function index() {
         
     }
-    public function applications(){
+
+    public function profile() {
+        $data['profile'] = $this->company->get_profile();
+        $data['page'] = 'profile';
+        $this->load->view('template_view', $data);
+    }
+
+    public function applications() {
         
     }
-    public function view_application(){
+
+    public function view_application() {
         
     }
-    public function jobs(){
+
+    public function jobs() {
         
     }
-    public function add_job(){
+
+    public function add_job() {
         
     }
-    public function search(){
+
+    public function search() {
         
     }
 

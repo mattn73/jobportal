@@ -23,7 +23,7 @@ class Login extends CI_Controller {
         } else {
             $result = $this->login->validate('company', $this->input->post());
             if ($result) {
-                redirect(base_url().'company/');
+                redirect(base_url().'company/profile');
             } else {
                 $error = new stdClass();
                 $error->class = 'alert-danger';

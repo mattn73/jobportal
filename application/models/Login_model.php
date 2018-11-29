@@ -10,7 +10,7 @@ class Login_model extends CI_Model {
         parent::__construct();
     }
 
-    public function validate($type,$args) {
+    public function validate($type, $args) {
         //extract user input into variables
         extract($args);
         $type = filter_var($type, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
@@ -22,8 +22,7 @@ class Login_model extends CI_Model {
             // If there is a user, then create session data
             $row = $query->row();
             $data = array(
-                'userid' => $row->id,
-                'email' => $row->email,
+                $type . '_id' => $row->id,
                 'is_logged_in' => true
             );
             $this->session->set_userdata($data);
