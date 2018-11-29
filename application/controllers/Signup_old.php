@@ -14,26 +14,27 @@ class Signup extends CI_Controller {
     }
 
     public function index() {
-        $this->load->view('user/signup_view');
+        $this->load->view('signup_view');
     }
 
-
-    public function company() {
-        $this->form_validation->set_rules('company_name', 'Company Name', 'required');
-        $this->form_validation->set_rules('contact_email', 'Email', 'required|valid_email|is_unique[company.contact_email]');
-        $this->form_validation->set_rules('password', 'Password', 'required');
-        $this->form_validation->set_rules('passconf', 'Password Confirmation', 'required|matches[password]');
-
-        if ($this->form_validation->run() == FALSE) {
-            $this->load->view('company/signup_view');
-        } else {
-            $this->load->model('Signup_model', 'signup');
-            $result = $this->signup->create_account('company', $this->input->post());
+    public function mobile() {
+        header("Access-Control-Allow-Origin: *");
+        $this->load->model('Signup_model', 'signup');
+        if (count($this->input->post()) > 0) {
+            $result = $this->signup->create_account($this->input->post());
+            $response = array();
             if ($result) {
-                redirect(base_url() . 'login/company');
+                $response['status'] = true;
+                $response['result']['user_id'] = $result;
+                $response['result']['msg'] = 'create account is successful';
+                echo json_encode($response);
             } else {
-                echo 'something went wrong';
+                $response['status'] = false;
+                $response['result']['msg'] = 'create account is failed ';
+                echo json_encode($response);
             }
+        } else {
+            show_404();
         }
     }
 
@@ -42,12 +43,10 @@ class Signup extends CI_Controller {
         $this->form_validation->set_rules('lastname', 'Lastname', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
         $this->form_validation->set_rules('passconf', 'Password Confirmation', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required|email');
-        $this->form_validation->set_rules('address', 'Address', 'required');
-        $this->form_validation->set_rules('title', 'Title', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view('user/signup_view');
+            $this->load->view('signup_view');
         } else {
             $this->load->model('Signup_model', 'signup');
             $result = $this->signup->create_account($this->input->post());

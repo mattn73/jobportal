@@ -10,150 +10,110 @@ class User extends CI_Controller {
      */
     public function __construct() {
         parent::__construct();
-        header("Access-Control-Allow-Origin: *");
         $this->load->library('user_agent');
-        $this->load->model('User_model', 'user');
-        $this->load->model('Appointment_model', 'appointment');
+        $this->load->model('Seeker_model', 'seeker');
+        $this->load->model('Skill_model', 'skill');
         $this->load->library('form_validation');
+
     }
 
     public function view() {
 
+        $user_id = 1;
 
+        $data['seeker'] = $this->seeker->get($user_id)[0];
+        $data['skills'] = $this->seeker->getSkill($user_id);
+        $data['title'] = 'User Profile';
+        //var_dump($data['skill']);die;
+        $this->load->view('user/partial/header', $data);
+        $this->load->view('user/profile_view', $data);
+        $this->load->view('user/partial/footer');
 
-        $data['users'] = $this->user->get();
-        $this->load->view('include/header', $data);
-        $this->load->view('include/sidebar');
-        $this->load->view('user/user_list_view');
-        $this->load->view('include/footer');
     }
 
-    public function add() {
-        // basic required field
-        $this->form_validation->set_rules('firstname', 'Firstname', 'required');
-        $this->form_validation->set_rules('lastname', 'Lastname', 'required');
-        $this->form_validation->set_rules('phone', 'Phone', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-        $this->form_validation->set_rules('address', 'Address', 'required');
-        $this->form_validation->set_rules('dateofbirth', 'Date of Birth', 'required|callback_compareDate');
-        if ($this->form_validation->run() == FALSE) {
-            $this->load->view('include/header');
-            $this->load->view('include/sidebar');
-            $this->load->view('user/user_add_view');
-            $this->load->view('include/footer');
-        } else {
-            $result = $this->user->add($this->input->post());
-            redirect($this->agent->referrer() . '?status=' . $result);
-        }
-    }
 
-    public function edit($user_id) {
+
+    public function edit() {
+
+        $user_id = 1;
 
         if ($this->input->post() != null) {
             $result = $this->user->update($user_id, $this->input->post());
             redirect($this->agent->referrer() . '?status=' . $result);
         } else {
-            $data['user'] = $this->user->get($user_id)[0];
-            $this->load->view('include/header', $data);
-            $this->load->view('include/sidebar');
-            $this->load->view('user/user_edit_view');
-            $this->load->view('include/footer');
+            $data['seeker'] = $this->seeker->get($user_id)[0];
+            $data['skills'] = $this->seeker->getSkill($user_id);
+            $data['title'] = 'Edit User Profile';
+            $this->load->view('user/partial/header');
+            $this->load->view('user/profile_edit', $data);
+            $this->load->view('user/partial/footer');
         }
     }
 
-    public function delete($user_id) {
-        $result = $this->user->delete($user_id);
-        if ($result) {
-            redirect($this->agent->referrer());
+
+
+
+    public function add_skill() {
+
+        $user_id = 1;
+		$user_id = $this->seeker->get($user_id)[0]->id;
+		return $this->skill->add($user_id,$this->input->post());
+        
+    }
+
+    public function remove_skill() {
+        $user_id = 1;
+        $user_id = $this->seeker->get($user_id)[0]->id;
+        return $this->skill->remove($user_id,$this->input->post());
+
+    }
+
+
+    public function do_upload()
+    {
+
+        $user_id = 1;
+        $config['upload_path']          = 'uploads/';
+        $config['allowed_types']        = 'word|doc|docx|pdf';
+        $config['max_size']             = 1000;
+        $config['max_width']            = 1024;
+        $config['max_height']           = 768;
+
+        $this->load->library('upload', $config);
+
+        if ( ! $this->upload->do_upload('cv'))
+        {
+
+            $data['seeker'] = $this->seeker->get(1)[0];
+            $data['skills'] = $this->seeker->getSkill(1);
+            $data['title'] = 'User Profile';
+            $data['error'] =  $this->upload->display_errors();
+
+
+            $this->load->view('user/partial/header', $data);
+            $this->load->view('user/profile_view', $data);
+            $this->load->view('user/partial/footer');
+        }
+        else
+        {
+
+            $filepath =  $config['upload_path'] . $this->upload->data()['file_name'];
+
+            $results = $this->seeker->updateCvStatus($user_id, $filepath);
+
+            $data['seeker'] = $this->seeker->get($user_id)[0];
+            $data['skills'] = $this->seeker->getSkill($user_id);
+            $data['title'] = 'User Profile';
+            $data['upload_data'] =  $this->upload->data();
+
+
+            $this->load->view('user/partial/header', $data);
+            $this->load->view('user/profile_view', $data);
+            $this->load->view('user/partial/footer');
+
+
         }
     }
 
-    public function block($user_id) {
-        $result = $this->user->block($user_id);
-        if ($result) {
-            redirect($this->agent->referrer());
-        }
-    }
-
-    public function unblock($user_id) {
-        $result = $this->user->unblock($user_id);
-        if ($result) {
-            redirect($this->agent->referrer());
-        }
-    }
-
-    public function profile($user_id) {
-        $result = $this->user->get($user_id);
-        if ($result) {
-            $data["user_personal_info"] = $result[0];
-            $data["appointments"] = $this->appointment->get_user_appointments($user_id);
-            $data["general_reports"] = $this->user->get_user_records($user_id);
-            $data["user_readings"] = $this->user->get_user_readings($user_id);
-//            print_r($data["general_reports"] );die;
-            $this->load->view('include/header', $data);
-            $this->load->view('include/sidebar');
-            $this->load->view('user/user_profile_view');
-            $this->load->view('include/footer');
-        } else {
-            show_404();
-        }
-    }
-
-    public function edit_external($user_id) {
-        $result = $this->update_user_external($user_id, $this->input->post());
-        return $result;
-    }
-
-    public function add_external($user_id) {
-        return $this->user->add_user_details_external($user_id, $this->input->post());
-    }
-
-    public function add_user($args) {
-        return $this->user->add_user($args);
-    }
-
-    public function update_user($user_id, $args) {
-        return $this->user->update_user($user_id, $args);
-    }
-
-    public function update_user_external($user_id, $args) {
-        echo $this->user->update_user_external($user_id, $args);
-    }
-
-    public function update_profile($user_id, $args) {
-        return $this->user->update_profile($user_id, $args);
-    }
-
-    public function delete_user($user_id) {
-        return $this->user->delete_user($user_id);
-    }
-
-    public function add_user_record($user_id) {
-
-        return $this->user->add_user_record($user_id, $this->input->post());
-    }
-
-    public function get_patients() {
-
-        echo json_encode($this->user->get_patients());
-    }
-
-    public function get_doctors() {
-
-        echo json_encode($this->user->get_doctors());
-    }
-
-    function compareDate() {
-
-        $selected_date = strtotime($_POST['dateofbirth']);
-        $today = strtotime(date('Y-m-d'));
-
-        if ($selected_date <= $today)
-            return True;
-        else {
-            $this->form_validation->set_message('compareDate', '%s should be less than today.');
-            return False;
-        }
-    }
 
 }
