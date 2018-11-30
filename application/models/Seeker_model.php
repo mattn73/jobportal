@@ -87,5 +87,38 @@ class Seeker_model extends CI_Model
         return false;
     }
 
+    public function update_seeker($user_id, $args){
+
+        if ($user_id) {
+
+            extract($args);
+
+
+            $this->db->set('firstname', $firstname);
+            $this->db->set('lastname', $lastname);
+            $this->db->set('postal_address', $postal_address);
+            $this->db->set('mobile', $mobile);
+            $this->db->set('dob', $dob);
+            $this->db->set('hqa', $hqa);
+            $this->db->where('id', $user_id);
+            $this->db->update('seeker');
+            return true;
+        }
+        return false;
+
+    }
+
+    public function complete_seeker_account($user_id, $args) {
+        extract($args);
+
+        $this->db->set('mobile', $mobile);
+        $this->db->set('dob', $dob);
+        $this->db->set('hqa', $hqa);
+
+        $this->db->where('id',$user_id );
+        $this->db->update('seeker');
+        return true;
+    }
+
 
 }

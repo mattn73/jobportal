@@ -2,23 +2,34 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Signup extends CI_Controller {
+class Signup extends CI_Controller
+{
 
     /**
      * Controller to sign up  users in the system.
      * @author Rimi <rimi.alfarwan@gmail.com>
      */
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         $this->load->library('form_validation');
     }
 
-    public function index() {
+    public function index()
+    {
         $this->load->view('user/signup_view');
     }
 
+    public function user()
+    {
+        $data['title'] = 'Register';
+        $this->load->view('user/partial/header', $data);
+        $this->load->view('user/signup_view');
+        $this->load->view('user/partial/footer');
+    }
 
-    public function company() {
+    public function company()
+    {
         $this->form_validation->set_rules('company_name', 'Company Name', 'required');
         $this->form_validation->set_rules('contact_email', 'Email', 'required|valid_email|is_unique[company.contact_email]');
         $this->form_validation->set_rules('password', 'Password', 'required');
@@ -37,20 +48,24 @@ class Signup extends CI_Controller {
         }
     }
 
-    public function create_account() {
-        $this->form_validation->set_rules('firstname', 'Firstname', 'required');
-        $this->form_validation->set_rules('lastname', 'Lastname', 'required');
+    public function seeker()
+    {
+        $this->form_validation->set_rules('title', 'Title', 'required|alpha_numeric_spaces');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[seeker.email]|valid_email');
+        $this->form_validation->set_rules('firstname', 'Firstname', 'required|alpha_numeric_spaces');
+        $this->form_validation->set_rules('lastname', 'Lastname', 'required|alpha_numeric_spaces');
+        $this->form_validation->set_rules('postal_address', 'Postal Address', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
-        $this->form_validation->set_rules('passconf', 'Password Confirmation', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required|email');
-        $this->form_validation->set_rules('address', 'Address', 'required');
-        $this->form_validation->set_rules('title', 'Title', 'required');
+        $this->form_validation->set_rules('conf_pass', 'Password Confirmation', 'required|matches[password]');
 
         if ($this->form_validation->run() == FALSE) {
+            $data['title'] = 'Register';
+            $this->load->view('user/partial/header', $data);
             $this->load->view('user/signup_view');
+            $this->load->view('user/partial/footer');
         } else {
             $this->load->model('Signup_model', 'signup');
-            $result = $this->signup->create_account($this->input->post());
+            $result = $this->signup->create_seeker_account('seeker', $this->input->post());
             if ($result) {
                 redirect(base_url() . 'login');
             } else {
@@ -58,5 +73,16 @@ class Signup extends CI_Controller {
             }
         }
     }
+
+    public function complete()
+    {
+        $data['title'] = 'Complete';
+        $this->load->view('user/partial/header', $data);
+        $this->load->view('user/complete', $data);
+        $this->load->view('user/partial/footer');
+    }
+
+
+
 
 }
