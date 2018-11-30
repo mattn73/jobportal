@@ -64,8 +64,7 @@ class Company extends MY_Controller {
     public function add_job() {
         $data['page'] = 'add_job';
         $this->form_validation->set_rules('title', 'Title', 'required');
-        $this->form_validation->set_rules('reference', 'Reference', 'required');
-        $this->form_validation->set_rules('closing_date', 'Closing Date', 'required');
+        $this->form_validation->set_rules('closing_date_s', 'Closing Date', 'required|callback_closedate_check');
         $this->form_validation->set_rules('description', 'Description', 'required');
         if ($this->form_validation->run() == FALSE) {
 
@@ -122,6 +121,19 @@ class Company extends MY_Controller {
 
     public function search() {
         
+    }
+
+    public function closedate_check($str) {
+        $time = strtotime($str);
+        if ($str == '') {
+            $this->form_validation->set_message('closedate_check', 'The closing date field is required.');
+            return FALSE;
+        } else if ($time <= time()) {
+            $this->form_validation->set_message('closedate_check', 'The closing date should be greater than today');
+            return FALSE;
+        } else {
+            return TRUE;
+        }
     }
 
 }

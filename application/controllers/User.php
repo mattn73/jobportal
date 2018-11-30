@@ -2,15 +2,13 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class User extends MY_Controller
-{
+class User extends MY_Controller {
 
     /**
      * User controller for the system.
      * @author Rimi <rimi.alfarwan@gmail.com>
      */
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
         $this->load->library('user_agent');
         $this->load->model('Seeker_model', 'seeker');
@@ -18,11 +16,9 @@ class User extends MY_Controller
         $this->load->library('form_validation');
         $this->data['is_logged_in'] = $this->session->userdata('is_logged_in');
         $this->data['name'] = $this->session->userdata('name');
-
     }
 
-    public function index()
-    {
+    public function index() {
 
         $user_id = $this->session->userdata('seeker_id');
         $this->data['title'] = 'User Profile';
@@ -32,12 +28,9 @@ class User extends MY_Controller
         $this->load->view('user/partial/header', $this->data);
         $this->load->view('user/profile_view', $data);
         $this->load->view('user/partial/footer');
-
     }
 
-
-    public function edit()
-    {
+    public function edit() {
 
         $user_id = $this->session->userdata('seeker_id');
 
@@ -54,8 +47,7 @@ class User extends MY_Controller
         }
     }
 
-    public function edit_save()
-    {
+    public function edit_save() {
 
         $user_id = $this->session->userdata('seeker_id');
 
@@ -64,7 +56,7 @@ class User extends MY_Controller
         $this->form_validation->set_rules('lastname', 'Lastname', 'required|alpha_numeric_spaces');
         $this->form_validation->set_rules('postal_address', 'Postal Address', 'required');
         $this->form_validation->set_rules('mobile', 'Contact Number:', 'required');
-        $this->form_validation->set_rules('dob', 'Date of Birth', 'required');
+        $this->form_validation->set_rules('dob', 'Date of Birth', 'required|callback_dob_check');
         $this->form_validation->set_rules('hqa', 'Highest Qualification Achieve', 'required');
 
 
@@ -86,26 +78,34 @@ class User extends MY_Controller
         }
     }
 
+    public function dob_check($str) {
+        $datetime1 = date_create($str);
+        $datetime2 = date_create(date('Y-m-d'));
+        $interval = date_diff($datetime1, $datetime2);
+        if ($str == '') {
+            $this->form_validation->set_message('dob_check', 'The Date of Birth field is required.');
+            return FALSE;
+        } else if ($interval->y < 18) {
+            $this->form_validation->set_message('dob_check', 'Your age should be greater than 18 years old');
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
 
-    public function add_skill()
-    {
+    public function add_skill() {
 
         $user_id = $this->session->userdata('seeker_id');
 
         return $this->skill->add($user_id, $this->input->post());
-
     }
 
-    public function remove_skill()
-    {
+    public function remove_skill() {
         $user_id = $this->session->userdata('seeker_id');
         return $this->skill->remove($user_id, $this->input->post());
-
     }
 
-
-    public function do_upload()
-    {
+    public function do_upload() {
 
         $user_id = $this->session->userdata('seeker_id');
         $config['upload_path'] = 'uploads/';
@@ -142,19 +142,16 @@ class User extends MY_Controller
             $this->load->view('user/partial/header', $this->data);
             $this->load->view('user/profile_view', $data);
             $this->load->view('user/partial/footer');
-
-
         }
     }
 
-    public function seeker_complete()
-    {
+    public function seeker_complete() {
 
 
         $user_id = $this->session->userdata('seeker_id');
 
         $this->form_validation->set_rules('mobile', 'Title', 'required');
-        $this->form_validation->set_rules('dob', 'Date of Birth', 'required');
+        $this->form_validation->set_rules('dob', 'Date of Birth', 'required|callback_dob_check');
         $this->form_validation->set_rules('hqa', 'Highest Qualification Achieved', 'required');
 
 
@@ -175,6 +172,5 @@ class User extends MY_Controller
             }
         }
     }
-
 
 }

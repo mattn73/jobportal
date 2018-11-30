@@ -60,6 +60,20 @@ class Company_model extends CI_Model {
         return false;
     }
 
+    public function add_job($args) {
+        $company_id = $this->session->userdata('company_id');
+        extract($args);
+        $data = array(
+            'title' => $title,
+            'close_date' => $closing_date_s,
+            'description' => $description,
+            'company_id' => $company_id
+        );
+        $result = $this->db->insert('job', $data);
+        $insert_id = $this->db->insert_id();
+        return $result;
+    }
+
     public function update_job($args) {
         $company_id = $this->session->userdata('company_id');
         extract($args);

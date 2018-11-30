@@ -37,7 +37,7 @@
                                 </label>
                                 <div class="col-md-5">
                                     <div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                        <input class="form-control input-height" name="closing_date_s" size="16" placeholder="select closing date" type="text" >
+                                        <input class="form-control input-height" name="closing_date_s" size="16" placeholder="select closing date" type="text" value="<?= $job->close_date ?>"  >
                                         <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
                                     </div>
                                     <input type="hidden" name="closing_date" />
