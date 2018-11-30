@@ -45,12 +45,7 @@ class Job extends CI_Controller
             $user_id = $this->session->userdata('seeker_id');
             $result =  $this->job->apply($user_id,$job_id);
 
-            $data['job'] = $this->job->get($job_id)[0];
-            $this->data['title'] = $data['job']->title;
-            $this->load->view('user/partial/header', $this->data);
-            $this->load->view('job/application_view', $data);
-            $this->load->view('user/partial/footer');
-
+            redirect(base_url() . 'user/application');
         }
 
         else {

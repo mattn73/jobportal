@@ -120,5 +120,25 @@ class Seeker_model extends CI_Model
         return true;
     }
 
+    public function get_application($user_id) {
+
+        if ($user_id) {
+            $this->db->select('j.id,j.title,j.reference,j.close_date, j.description, c.name, c.address, c.email,a.status');
+            $this->db->from("job j");
+            $this->db->join('company c', 'j.company_id = c.id', 'left');
+            $this->db->join('application a', 'j.id = a.job', 'left');
+            $this->db->join('seeker s', 's.id = a.seeker', 'left');
+            $this->db->where('s.id', $user_id);
+            $query = $this->db->get();
+            if ($query->num_rows() > 0) {
+                $results = $query->result();
+                return $results;
+            }
+
+        }
+        return false;
+
+    }
+
 
 }

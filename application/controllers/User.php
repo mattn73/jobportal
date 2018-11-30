@@ -173,4 +173,14 @@ class User extends MY_Controller {
         }
     }
 
+
+
+    public function application(){
+
+        $user_id = $this->session->userdata('seeker_id');
+
+        $result = $this->seeker->get_application($user_id);
+        var_dump($result);die;
+
+    }
 }

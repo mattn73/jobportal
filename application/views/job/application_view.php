@@ -8,6 +8,7 @@
                 <h5 class="card-title"><?= $job->title ?></h5>
                 <h6 class="card-subtitle mb-2 text-muted"><?= $job->name ?></h6>
                 <p class="card-text"><?= $job->description ?></p>
+                <p class="card-text"><?= $job->status ?></p>
                 <a href="/job/view/<?= $job->id ?>" class="card-link">View</a>
             </div>
         </div>
