@@ -23,7 +23,7 @@
         <div class="limiter">
             <div class="container-login100 page-background">
                 <div class="wrap-login100">
-                    <?php echo form_open(base_url() . 'login/validate', 'class="login100-form validate-form" id="login_form"'); ?>
+                    <?php echo form_open(base_url() . 'login/seeker', 'class="login100-form validate-form" id="login_form"'); ?>
                     <span class="login100-form-logo">
                         <img alt="" src="<?= base_url() ?>assets/img/hospital.png">
                     </span>

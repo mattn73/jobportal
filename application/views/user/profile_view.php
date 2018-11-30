@@ -29,7 +29,7 @@
                     </tr>
 
                     <tr>
-                        <td>contact Number:</td>
+                        <td>Contact Number:</td>
                         <td>
                             <?= $seeker->mobile ?>
                         </td>
