@@ -35,16 +35,49 @@ class Company_model extends CI_Model {
         $this->db->where('id', $company_id);
         return $this->db->update('company', $data);
     }
+
     function get_jobs() {
         $company_id = $this->session->userdata('company_id');
-        $sql = "select * from job where company = ?";
+        $sql = "select * from job where company_id = ?";
         $query = $this->db->query($sql, $company_id);
         // Let's check if there are any results
         if ($query->num_rows() > 0) {
             // If there is a user, then create session data
-            return  $query->result();
+            return $query->result();
         }
         return false;
+    }
+
+    function get_job($job_id) {
+        $company_id = $this->session->userdata('company_id');
+        $sql = "select * from job where company_id = ? and id = ?";
+        $query = $this->db->query($sql, array($company_id, $job_id));
+        // Let's check if there are any results
+        if ($query->num_rows() > 0) {
+            // If there is a user, then create session data
+            return $query->result()[0];
+        }
+        return false;
+    }
+
+    public function update_job($args) {
+        $company_id = $this->session->userdata('company_id');
+        extract($args);
+        $data = array(
+            'title' => $title,
+            'close_date' => $closing_date_s,
+            'description' => $description
+        );
+        $this->db->where('id', $job_id);
+        $this->db->where('company_id', $company_id);
+        return $this->db->update('job', $data);
+    }
+
+    public function delete_job($job_id) {
+        $company_id = $this->session->userdata('company_id');
+        $sql = "delete from job where company_id = ? and id = ?";
+        $query = $this->db->query($sql, array($company_id, $job_id));
+        return $query;
     }
 
 }

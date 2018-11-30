@@ -37,8 +37,8 @@
                                         <?php foreach ($jobs as $job) : ?>
                                             <tr class="odd gradeX">
                                                 <td><?= $job->title ?></td>
-                                                <td><?= $$job->reference ?></td>
-                                                <td><?= $$job->close_date ?></td>
+                                                <td><?= $job->reference ?></td>
+                                                <td><?= $job->close_date ?></td>
                                                 <td>
                                                     <a href="<?= base_url() ?>company/edit_job/<?= $job->id ?>" class="btn btn-primary btn-xs">
                                                         <i class="fa fa-pencil"></i>

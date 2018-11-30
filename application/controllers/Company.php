@@ -62,7 +62,62 @@ class Company extends MY_Controller {
     }
 
     public function add_job() {
-        
+        $data['page'] = 'add_job';
+        $this->form_validation->set_rules('title', 'Title', 'required');
+        $this->form_validation->set_rules('reference', 'Reference', 'required');
+        $this->form_validation->set_rules('closing_date', 'Closing Date', 'required');
+        $this->form_validation->set_rules('description', 'Description', 'required');
+        if ($this->form_validation->run() == FALSE) {
+
+            $this->load->view('template_view', $data);
+        } else {
+            $result = $this->company->add_job($this->input->post());
+            if ($result) {
+                redirect(base_url() . 'company/jobs');
+            } else {
+                $error = new stdClass();
+                $error->class = 'alert-danger';
+                $error->msg = 'Something wrong happened! please contact site admin';
+                $data['error'] = $error;
+                $this->load->view('template_view', $data);
+            }
+        }
+    }
+
+    public function edit_job($job_id = 0) {
+        $job = $this->company->get_job($job_id);
+        if ($job) {
+            $data['job'] = $job;
+            $data['page'] = 'edit_job';
+            $this->form_validation->set_rules('title', 'Title', 'required');
+            $this->form_validation->set_rules('closing_date_s', 'Closing Date', 'required');
+            $this->form_validation->set_rules('description', 'Description', 'required');
+            if ($this->form_validation->run() == FALSE) {
+                $this->load->view('template_view', $data);
+            } else {
+                $result = $this->company->update_job($this->input->post());
+                if ($result) {
+                    redirect(base_url() . 'company/jobs');
+                } else {
+                    $error = new stdClass();
+                    $error->class = 'alert-danger';
+                    $error->msg = 'Something wrong happened! please contact site admin';
+                    $data['error'] = $error;
+                    $this->load->view('template_view', $data);
+                }
+            }
+        } else {
+            show_404();
+        }
+    }
+
+    public function delete_job($job_id = 0) {
+        $result = $this->company->delete_job($job_id);
+        if ($result) {
+            redirect(base_url() . 'company/jobs');
+        } else {
+            show_404();
+        }
     }
 
     public function search() {
