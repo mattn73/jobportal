@@ -25,11 +25,15 @@
                             <h4><?= $job->title ?></h4>
                         </div>
 
+                        <div class="title">
+                            <h6><?= $job->name ?></h6>
+                        </div>
+
                         <div class="text">
                             <span><?= $job->description ?></span>
                         </div>
 
-                        <a href="/site/job/<?= $job->id ?>">Learn More</a>
+                        <a href="/job/view/<?= $job->id ?>">Learn More</a>
 
                     </div>
                 </div>
