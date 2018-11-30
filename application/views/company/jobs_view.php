@@ -5,7 +5,7 @@
             <div class="col-md-12">
                 <div class="card card-topline-red">
                     <div class="card-head">
-                        <header></header>
+                        <header>My Jobs</header>
                         <div class="tools">
                             <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
                             <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
@@ -45,6 +45,9 @@
                                                     </a>
                                                     <a href="<?= base_url() ?>company/delete_job/<?= $job->id ?>" class="btn btn-danger btn-xs">
                                                         <i class="fa fa-trash-o "></i>
+                                                    </a>
+                                                    <a href="<?= base_url() ?>company/applications/<?= $job->id ?>" class="btn btn-dark btn-xs">
+                                                        <i class="fa fa-file "></i>
                                                     </a>
                                                 </td>
                                             </tr> 

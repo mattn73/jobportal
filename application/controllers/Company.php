@@ -47,8 +47,14 @@ class Company extends MY_Controller {
         }
     }
 
-    public function applications() {
-        
+    public function applications($job_id = 0) {
+        if ($job_id) {
+            $data['applications'] = $this->company->get_applications($job_id);
+            $data['page'] = 'applications';
+            $this->load->view('template_view', $data);
+        } else {
+            show_404();
+        }
     }
 
     public function view_application() {
@@ -119,8 +125,25 @@ class Company extends MY_Controller {
         }
     }
 
-    public function search() {
-        
+    public function candidates() {
+        $data['page'] = 'search';
+        $this->form_validation->set_rules('skill', 'Skill', 'required');
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('template_view', $data);
+        } else {
+            $result = $this->company->get_candidates($this->input->post('skill'));
+            if ($result) {
+
+                $data['candidates'] = $result;
+                $this->load->view('template_view', $data);
+            } else {
+                $error = new stdClass();
+                $error->class = 'alert-danger';
+                $error->msg = 'Something wrong happened! please contact site admin';
+                $data['error'] = $error;
+                $this->load->view('template_view', $data);
+            }
+        }
     }
 
     public function closedate_check($str) {

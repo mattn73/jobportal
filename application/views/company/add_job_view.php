@@ -21,6 +21,7 @@
                                 </label>
                                 <div class="col-md-5">
                                     <input type="text" name="title" value="<?= set_value('title') ?>"  placeholder="enter job title" class="form-control input-height" />
+                                    <p><?php echo form_error('title', '<div class="alert alert-danger">', '</div>'); ?></p>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -29,6 +30,7 @@
                                 </label>
                                 <div class="col-md-5">
                                     <input type="text" name="reference" value="<?= set_value('reference') ?>"  placeholder="enter job reference" class="form-control input-height" />
+                                    <p><?php echo form_error('reference', '<div class="alert alert-danger">', '</div>'); ?></p>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -40,6 +42,7 @@
                                         <input class="form-control input-height" name="closing_date_s" size="16" placeholder="select closing date" type="text" value="">
                                         <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
                                     </div>
+                                    <p><?php echo form_error('closing_date_s', '<div class="alert alert-danger">', '</div>'); ?></p>
                                     <input type="hidden" id="dtp_input2" value="" />
                                 </div>
                             </div>
@@ -51,6 +54,7 @@
                                     <textarea name="description" placeholder="description" class="form-control textarea" >
                                         
                                     </textarea>
+                                    <p><?php echo form_error('description', '<div class="alert alert-danger">', '</div>'); ?></p>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -58,9 +62,9 @@
                                     <button type="submit" class="btn btn-info m-r-20">Save</button>
 
                                 </div>
-                                <div>
+<!--                                <div>
                                     <?php echo validation_errors(); ?>
-                                </div> 
+                                </div> -->
                             </div>
                             <?php echo form_close(); ?>
                         </div>

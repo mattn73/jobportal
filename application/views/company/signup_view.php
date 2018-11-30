@@ -43,7 +43,9 @@
                             <div class="wrap-input100 " data-validate = "Enter Company Name">
                                 <input class="input100" type="text" name="company_name" placeholder="Company Name" value="<?= set_value('company_name'); ?>">
                                 <span class="focus-input100" data-placeholder="&#xf207;"></span>
+
                             </div>
+                            <p><?php echo form_error('company_name', '<div class="alert alert-danger">', '</div>'); ?></p>
                         </div>
 
                         <div class="col-lg-6 p-t-20">
@@ -51,6 +53,7 @@
                                 <input class="input100" type="text" name="contact_email" placeholder="Email" value="<?= set_value('contact_email'); ?>">
                                 <span class="focus-input100" data-placeholder="&#xf15a;"></span>
                             </div>
+                            <p><?php echo form_error('contact_email', '<div class="alert alert-danger">', '</div>'); ?></p>
                         </div>
 
                         <div class="col-lg-6 p-t-20">
@@ -58,12 +61,14 @@
                                 <input class="input100" type="password" name="password" placeholder="Password" value="<?= set_value('password'); ?>" >
                                 <span class="focus-input100" data-placeholder="&#xf191;"></span>
                             </div>
+                            <p><?php echo form_error('password', '<div class="alert alert-danger">', '</div>'); ?></p>
                         </div>
                         <div class="col-lg-6 p-t-20">
                             <div class="wrap-input100 " data-validate="Enter password again">
                                 <input class="input100" type="password" name="passconf" placeholder="Confirm password" value="<?= set_value('passconf'); ?>">
                                 <span class="focus-input100" data-placeholder="&#xf191;"></span>
                             </div>
+                            <p><?php echo form_error('passconf', '<div class="alert alert-danger">', '</div>'); ?></p>
                         </div>
                     </div>
                     <div class="container-login100-form-btn">
@@ -72,7 +77,12 @@
                         </button>
 
                     </div>
-                     <?php echo validation_errors(); ?>
+                    <!-- Server side validation errors -->
+                    <?php if (isset($error)): ?>
+                        <div class="alert <?= $error->class; ?>" role="alert">
+                            <?= $error->msg; ?>
+                        </div>
+                    <?php endif; ?>
                     <div class="text-center p-t-30">
                         <a class="txt1" href="<?= base_url() ?>login/company">
                             You already have a membership?

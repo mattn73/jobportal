@@ -41,10 +41,12 @@
                     <div class="wrap-input100" >
                         <input class="input100" type="text" name="email" placeholder="Email" value="<?= set_value('email'); ?>">
                         <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        <p><?php echo form_error('email', '<div class="alert alert-danger">', '</div>'); ?></p>
                     </div>
                     <div class="wrap-input100">
                         <input class="input100" type="password" name="password" placeholder="Password">
                         <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                        <p><?php echo form_error('password', '<div class="alert alert-danger">', '</div>'); ?></p>
                     </div>
                     <div class="container-login100-form-btn">
                         <button class="login100-form-btn">
@@ -57,8 +59,6 @@
                         </a>
                     </div>
                     <div class="text-center p-t-30">
-                        <!-- Client side validation errors -->
-                        <?php echo validation_errors(); ?>
                         <!-- Server side validation errors -->
                         <?php if (isset($error)): ?>
                             <div class="alert <?= $error->class; ?>" role="alert">

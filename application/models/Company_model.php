@@ -94,4 +94,34 @@ class Company_model extends CI_Model {
         return $query;
     }
 
+    public function get_candidates($skill) {
+        $sql = "select * 
+from skill,skill_seeker,seeker 
+where skill.id = skill_seeker.skill and
+seeker.id = skill_seeker.seeker and
+skill.name like ?";
+        $query = $this->db->query($sql, '%' . $skill . '%');
+        // Let's check if there are any results
+        if ($query->num_rows() > 0) {
+            // If there is a user, then create session data
+            return $query->result();
+        }
+        return false;
+    }
+
+    public function get_applications($job_id) {
+        $company_id = $this->session->userdata('company_id');
+        $sql = "select * 
+from application,seeker,job
+where application.seeker = seeker.id and application.job = job.id and 
+application.job = ? and job.company_id = ? ";
+        $query = $this->db->query($sql, array($job_id, $company_id));
+        // Let's check if there are any results
+        if ($query->num_rows() > 0) {
+            // If there is a user, then create session data
+            return $query->result();
+        }
+        return false;
+    }
+
 }

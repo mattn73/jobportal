@@ -16,6 +16,7 @@
                                 </label>
                                 <div class="col-md-5">
                                     <input type="text" name="name" value="<?= $profile->name ?>"  placeholder="enter company name" class="form-control input-height" />
+                                    <p><?php echo form_error('name', '<div class="alert alert-danger">', '</div>'); ?></p>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -24,6 +25,7 @@
                                 </label>
                                 <div class="col-md-5">
                                     <input type="text" name="email" value="<?= $profile->email ?>"  placeholder="enter company email" class="form-control input-height" />
+                                    <p><?php echo form_error('email', '<div class="alert alert-danger">', '</div>'); ?></p>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -32,6 +34,7 @@
                                 </label>
                                 <div class="col-md-5">
                                     <input type="text" name="contact_name" value="<?= $profile->contact_name ?>"  placeholder="enter contact name" class="form-control input-height" />
+                                    <p><?php echo form_error('contact_name', '<div class="alert alert-danger">', '</div>'); ?></p>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -39,6 +42,7 @@
                                 </label>
                                 <div class="col-md-5">
                                     <input type="text" name="contact_email" value="<?= $profile->contact_email ?>"  placeholder="enter contact email" class="form-control input-height" disabled="" />
+                                    <p><?php echo form_error('contact_email', '<div class="alert alert-danger">', '</div>'); ?></p>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -49,6 +53,7 @@
                                     <textarea name="address" placeholder="address" class="form-control textarea" >
                                         <?= $profile->address ?>
                                     </textarea>
+                                    <p><?php echo form_error('address', '<div class="alert alert-danger">', '</div>'); ?></p>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -56,9 +61,9 @@
                                     <button type="submit" class="btn btn-info m-r-20">Save</button>
                                    
                                 </div>
-                                <div>
+<!--                                <div>
                                     <?php echo validation_errors(); ?>
-                                </div> 
+                                </div> -->
                             </div>
 
                           

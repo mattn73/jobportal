@@ -51,8 +51,8 @@
                     <!-- logo start -->
                     <div class="page-logo">
                         <a href="<?=base_url()?>">
-                            <span class="logo-icon fa fa-stethoscope fa-rotate-45"></span>
-                            <span class="logo-default" >KARDIA</span> </a>
+                            <span class="logo-icon fa fa-briefcase"></span>
+                            <span class="logo-default" >Job Portal</span> </a>
                     </div>
                     <!-- logo end -->
                     <ul class="nav navbar-nav navbar-left in">
