@@ -10,15 +10,21 @@ class Site extends CI_Controller {
      */
     function __construct() {
         parent::__construct();
+        $this->load->model('Job_model', 'job');
     }
 
     public function index() {
-        $this->load->view('include/header');
-        $this->load->view('site/home_view');
-        $this->load->view('include/footer');
+
+
+
+        $data['jobs'] = $this->job->getTenJob();
+        $this->data['title'] = 'Job Portal';
+        $this->load->view('user/partial/header', $this->data);
+        $this->load->view('job/site', $data);
+        $this->load->view('user/partial/footer');
     }
 
-    public function login() {
+    public function job() {
         $this->load->view('login');
     }
 
