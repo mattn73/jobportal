@@ -11,6 +11,8 @@ class Site extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('Job_model', 'job');
+        $this->data['is_logged_in'] = $this->session->userdata('is_logged_in');
+        $this->data['name'] = $this->session->userdata('name');
     }
 
     public function index() {

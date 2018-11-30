@@ -30,4 +30,40 @@ class Job_model extends CI_Model
 
     }
 
+    public function get($id)
+    {
+        if ($id) {
+            $this->db->select('j.id,j.title,j.reference,j.close_date, j.description, c.name, c.address, c.email');
+            $this->db->from("job j");
+            $this->db->join('company c', 'j.company_id = c.id', 'left');
+            $this->db->where('j.id', $id);
+            $query = $this->db->get();
+            if ($query->num_rows() > 0) {
+                $results = $query->result();
+                return $results;
+            }
+
+        }
+        return false;
+
+    }
+
+    public function apply($user_id, $job_id)
+    {
+        if ($user_id) {
+
+            $data = array(
+                'seeker' => $user_id,
+                'job' => $job_id,
+
+            );
+            $this->db->insert('application', $data);
+            return $this->db->insert_id();
+
+        }
+        return false;
+
+    }
+
+
 }
