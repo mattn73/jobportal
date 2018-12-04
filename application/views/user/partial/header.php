@@ -57,8 +57,15 @@
                 <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Job</a>
+                <a class="nav-link" href="/job">Job</a>
             </li>
+            <?php if (isset($is_logged_in) && $is_logged_in): ?>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/application">Application</a>
+                </li>
+            <?php endif; ?>
+
         </ul>
         <ul id="connection-nav" class="navbar-nav mr-auto mt-2 mt-lg-0">
 

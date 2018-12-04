@@ -123,7 +123,7 @@ class Seeker_model extends CI_Model
     public function get_application($user_id) {
 
         if ($user_id) {
-            $this->db->select('j.id,j.title,j.reference,j.close_date, j.description, c.name, c.address, c.email,a.status');
+            $this->db->select('j.id,j.title,j.reference,j.close_date, j.description, c.name, c.address, c.email,a.status, a.client_status');
             $this->db->from("job j");
             $this->db->join('company c', 'j.company_id = c.id', 'left');
             $this->db->join('application a', 'j.id = a.job', 'left');
