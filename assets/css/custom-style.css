@@ -117,5 +117,91 @@
 }
 
 
+.icon-status{
 
 
+    margin-left: 94%;
+    margin-top: -31px;
+    position: relative;
+    display: block;
+    font-size: 35px;
+}
+
+.row-status{
+
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+
+.container{
+
+    margin-top: 3% !important;
+}
+
+.title-apply{
+
+    margin-bottom: 2% !important;
+    text-align: center;
+}
+
+.custom-btn{
+
+    margin-left: 87%;
+
+}
+
+.notification{
+
+    margin-top: 11% !important;
+    margin-left: -54% !important;
+    color: #eef3f8;
+}
+
+.account{
+    margin-left: 42% !important;
+}
+
+/************Badge Notification ***********/
+
+.badge1 {
+    position:relative;
+}
+.badge1[data-badge]:after {
+    content: attr(data-badge);
+    position: absolute;
+    top: 5px;
+    right: 86%;
+    font-size: 0.9em;
+    background: #ff3636;
+    color: white;
+    width: 19px;
+    height: 19px;
+    text-align: center;
+    line-height: 17px;
+    border-radius: 50%;
+    box-shadow: 0 0 1px #333;
+}
+
+.badge1[data-badge=""]:after {
+    content: none;
+}
+
+.side-bar-reminder{
+
+    min-width: 200px;
+    display: inline-block;
+    margin-left: 2%;
+}
+
+#side-reminder .badge1[data-badge]:after {
+    top: -2px;
+    right: 56%;
+}
+
+
+#navbarToggle a{
+
+    font-size: 17px !important;
+
+}

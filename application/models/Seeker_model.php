@@ -140,5 +140,46 @@ class Seeker_model extends CI_Model
 
     }
 
+    public function get_notification($user_id){
+
+
+        $this->db->like('client_status', 'New');
+        $this->db->where('seeker', $user_id);
+        $this->db->from('application');
+        return $this->db->count_all_results();
+
+
+
+    }
+
+    public function update_notification($job_id){
+
+        $user_id = $this->session->userdata('seeker_id');
+        if ($user_id) {
+
+            $this->db->select("id");
+            $this->db->from("application a");
+            $this->db->where('a.job', $job_id);
+            $this->db->where('a.seeker', $user_id);
+            $this->db->where('a.client_status', 'New');
+            $query = $this->db->get();
+            if ($query->num_rows() > 0) {
+                $results = $query->result();
+                $this->db->set('client_status', 'Viewed');
+                $this->db->where('id',$results[0]->id);
+                $this->db->update('application');
+                return true;
+            }
+
+
+
+        }
+        return false;
+
+
+
+    }
+
+
 
 }

@@ -13,12 +13,15 @@ class Job_model extends CI_Model
     }
 
 
-    public function getTenJob()
+    public function get_last_Job()
     {
+
+        $today = date('Y-m-d', strtotime('today'));
 
         $this->db->select('j.id,j.title,j.reference,j.close_date, j.description, c.name, c.address, c.email');
         $this->db->from("job j");
         $this->db->join('company c', 'j.company_id = c.id', 'left');
+        $this->db->where('j.close_date >=', $today);
         $this->db->limit(10);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
@@ -64,6 +67,28 @@ class Job_model extends CI_Model
         return false;
 
     }
+
+    public function getJob()
+    {
+
+        $today = date('Y-m-d', strtotime('today'));
+
+        $this->db->select('j.id,j.title,j.reference,j.close_date, j.description, c.name, c.address, c.email');
+        $this->db->from("job j");
+        $this->db->join('company c', 'j.company_id = c.id', 'left');
+        $this->db->where('j.close_date >=', $today);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            // If there is a user, then create session data
+            $results = $query->result();
+            return $results;
+        }
+        return false;
+
+    }
+
+
+
 
 
 }

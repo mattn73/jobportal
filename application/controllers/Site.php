@@ -16,10 +16,7 @@ class Site extends CI_Controller {
     }
 
     public function index() {
-
-
-
-        $data['jobs'] = $this->job->getTenJob();
+        $data['jobs'] = $this->job->get_last_Job();
         $this->data['title'] = 'Job Portal';
         $this->load->view('user/partial/header', $this->data);
         $this->load->view('job/site', $data);

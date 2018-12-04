@@ -179,8 +179,30 @@ class User extends MY_Controller {
 
         $user_id = $this->session->userdata('seeker_id');
 
-        $result = $this->seeker->get_application($user_id);
-        var_dump($result);die;
+        $data['jobs'] = $this->seeker->get_application($user_id);
+
+
+        $this->data['title'] = "Application";
+        $this->load->view('user/partial/header', $this->data);
+        $this->load->view('job/application_view', $data);
+        $this->load->view('user/partial/footer');
+
+
+//        var_dump($data);die;
+
+    }
+
+    public function get_notification(){
+
+        $user_id = $this->session->userdata('seeker_id');
+
+        $result = $this->seeker->get_notification($user_id);
+
+        echo json_encode($result);
+
+
+
+
 
     }
 }
