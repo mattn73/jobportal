@@ -46,7 +46,7 @@
                                                 <td><?= $candidate->firstname . ' ' . $candidate->lastname ?></td>
                                                 <td><?= $candidate->mobile ?></td>
                                                 <td>
-                                                    <?php if (1) : ?>
+                                                    <?php if ($application->cv) : ?>
                                                         <a href="<?= base_url() . $candidate->cv_path ?>">view</a>
                                                     <?php else : ?>
                                                         --

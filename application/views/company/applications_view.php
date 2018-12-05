@@ -14,9 +14,11 @@
                             <table class="table table-hover table-checkable order-column full-width" id="example4">
                                 <thead>
                                     <tr>
-                                        <th> Job Title </th>
-                                        <th> Job Reference </th>
-                                        <th> Closing Date </th>
+                                        <th> Application date </th>
+                                        <th> Candidate Name </th>
+                                        <th> Candidate Email </th>
+                                        <th> Candidate CV </th>
+                                        <th> Status </th>
                                         <th> Action </th>
                                     </tr>
                                 </thead>
@@ -24,16 +26,27 @@
                                     <?php if ($applications) : ?>
                                         <?php foreach ($applications as $application) : ?>
                                             <tr class="odd gradeX">
-                                                <td><?= $application->title ?></td>
-                                                <td><?= $application->reference ?></td>
-                                                <td><?= $application->close_date ?></td>
+                                                <td><?= $application->date ?></td>
+                                                <td><?= $application->firstname . ' ' . $application->lastname ?></td>
+                                                <td><?= $application->email ?></td>
                                                 <td>
-                                                    <a href="<?= base_url() ?>company/open_application/<?= $application->id ?>" class="btn btn-primary btn-xs">
+                                                    <?php if ($application->cv) : ?>
+                                                        <a id="view_cv" href="<?= base_url() . $application->cv_path ?>">view</a>
+                                                    <?php else : ?>
+                                                        --
+                                                    <?php endif; ?>
+                                                </td>
+                                                <td>
+                                                    <?= $application->status ?>
+                                                </td>
+                                                <td>
+                                                    <a href="<?= base_url() ?>company/application_status/Accepted" class="btn btn-primary btn-xs">
                                                         <i class="fa fa-pencil"></i>
                                                     </a>
-                                                    <a href="<?= base_url() ?>company/convert_application/<?= $application->id ?>" class="btn btn-danger btn-xs">
+                                                    <a href="<?= base_url() ?>company/application_status/Rejected" class="btn btn-danger btn-xs">
                                                         <i class="fa fa-trash-o "></i>
                                                     </a>
+
                                                 </td>
                                             </tr> 
                                         <?php endforeach; ?>
@@ -48,3 +61,10 @@
     </div>
 </div>
 <!-- end page content -->
+<script>
+    $('#view_cv').click(function () {
+        $.get("<?= base_url()?>company/application_status", function (data, status) {
+            console.log('Status Changed!');
+        });
+    });
+</script>
