@@ -188,3 +188,46 @@ $(".delete-icon").on('click', function (e) {
 
 
 });
+
+$(document).ready(function () {
+
+    checkAppointment();
+
+});
+
+//Check if you have new notification.
+window.setInterval(function () {
+
+    checkAppointment();
+
+}, 30000);
+
+
+function checkAppointment() {
+
+
+        var url =   '/user/get_notification';
+        console.log('appint check');
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function (data) {
+
+                    setNotification(JSON.parse(data));
+                }
+        });
+
+
+
+}
+
+
+
+function setNotification(notif) {
+
+    if(notif == 0){
+        notif = ""
+    }
+
+     $('.badge1').attr('data-badge', notif);
+}

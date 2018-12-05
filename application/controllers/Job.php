@@ -15,6 +15,20 @@ class Job extends CI_Controller
     }
 
 
+    public function index(){
+
+
+        $data['jobs'] = $this->seeker->get_application($user_id);
+
+        $this->data['title'] = "Job";
+        $this->load->view('user/partial/header', $this->data);
+        $this->load->view('job/job_Job', $data);
+        $this->load->view('user/partial/footer');
+
+
+    }
+
+
     public function view($job_id = 0)
     {
 
@@ -37,6 +51,17 @@ class Job extends CI_Controller
 
         }
     }
+    public  function check_appllcation($job_id = 0){
+
+
+        $this->load->model('Seeker_model', 'seeker');
+        $this->seeker->update_notification($job_id);
+
+        $this->view($job_id);
+
+
+
+    }
 
     public function apply($job_id = 0)
     {
@@ -45,12 +70,7 @@ class Job extends CI_Controller
             $user_id = $this->session->userdata('seeker_id');
             $result =  $this->job->apply($user_id,$job_id);
 
-            $data['job'] = $this->job->get($job_id)[0];
-            $this->data['title'] = $data['job']->title;
-            $this->load->view('user/partial/header', $this->data);
-            $this->load->view('job/application_view', $data);
-            $this->load->view('user/partial/footer');
-
+            redirect(base_url() . 'user/application');
         }
 
         else {
