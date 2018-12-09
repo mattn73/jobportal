@@ -9,12 +9,14 @@
                     <tr>
                         <td>Email:</td>
                         <td><input type="text" value="" class="form-control"
-                                   name="email" placeholder="Enter Email" required></td>
+                                   name="email" placeholder="Enter Email" required><br/>
+                            <p><?php echo form_error('email', '<div class="alert alert-danger">', '</div>'); ?></p></td>
                     </tr>
                     <tr>
                         <td>Password:</td>
                         <td><input type="password" value="" class="form-control"
-                                   name="password" placeholder="Enter Password" required></td>
+                                   name="password" placeholder="Enter Password" required><br/>
+                            <p><?php echo form_error('password', '<div class="alert alert-danger">', '</div>'); ?></p></td>
                     </tr>
 
 

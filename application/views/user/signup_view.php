@@ -24,7 +24,7 @@
                         <tr>
                             <td>LastName:</td>
                             <td><input type="text" value="" class="form-control"
-                                       name="lastname" placeholder="Enter Lastname"  value="<?= set_value('firstname') ?>"></td>
+                                       name="lastname" placeholder="Enter Lastname"  value="<?= set_value('lastname') ?>"></td>
                         </tr>
 
                         <tr>
