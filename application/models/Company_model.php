@@ -134,8 +134,6 @@ application.job = ? and job.company_id = ? ";
                 'status' => $status,
             );
         }
-
-
         $this->db->where('id', $application_id);
         $this->db->where('status', 'New');
         $this->db->or_where('status', 'Viewed');
