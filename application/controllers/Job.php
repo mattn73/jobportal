@@ -17,12 +17,12 @@ class Job extends CI_Controller
 
     public function index(){
 
-
-        $data['jobs'] = $this->seeker->get_application($user_id);
+        $this->load->model('Seeker_model', 'seeker');
+        $data['jobs'] = $this->job->getJob();
 
         $this->data['title'] = "Job";
         $this->load->view('user/partial/header', $this->data);
-        $this->load->view('job/job_Job', $data);
+        $this->load->view('job/job_list', $data);
         $this->load->view('user/partial/footer');
 
 

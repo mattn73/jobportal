@@ -1,5 +1,17 @@
 <h2 class="title-apply">JOBS APPLY</h2>
 
+<?php if ($jobs == null): ?>
+
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+        <div class="col-md-5 p-lg-5 mx-auto my-5">
+            <h1 class="font-weight-normal">Non Job Application</h1>
+            <p class="lead font-weight-normal">Apply For a Job</p>
+            <br/>
+            <a href="/" class="btn btn-lg btn-outline-primary text-uppercase">BACK TO HOMEPAGES</a>
+        </div>
+    </div>
+
+<?php else: ?>
 
 <?php foreach ($jobs as $job): ?>
     <div class="row row-status">
@@ -31,3 +43,4 @@
 <?php endforeach; ?>
 
 
+<?php endif; ?>
