@@ -7,7 +7,7 @@
             <h1 class="font-weight-normal">Non Job Application</h1>
             <p class="lead font-weight-normal">Apply For a Job</p>
             <br/>
-            <a href="/" class="btn btn-lg btn-outline-primary text-uppercase">BACK TO HOMEPAGES</a>
+            <a href="/" class="btn btn-lg btn-outline-primary text-uppercase">BACK TO HOMEPAGE</a>
         </div>
     </div>
 

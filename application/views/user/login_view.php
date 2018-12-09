@@ -23,7 +23,14 @@
                     </tbody>
                 </table>
 
-                <?php echo validation_errors(); ?>
+                <div class="text-center p-t-30">
+                    <!-- Server side validation errors -->
+                    <?php if (isset($error)): ?>
+                        <div class="alert <?= $error->class; ?>" role="alert">
+                            <?= $error->msg; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
                 <button type="submit" class="btn btn-lg btn-primary ml-2">Login</button>
 
                 <?php echo form_close(); ?>

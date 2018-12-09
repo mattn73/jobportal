@@ -51,10 +51,12 @@ class Login extends CI_Controller
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('password', 'Password', 'required');
         if ($this->form_validation->run() == FALSE) {
-
+            $error = new stdClass();
+            $error->class = 'alert-danger';
+            $error->msg = 'Wrong username or password';
             $data['title'] = 'Login';
             $this->load->view('user/partial/header', $data);
-            $this->load->view('user/login_view');
+            $this->load->view('user/login_view' ,  $data);
             $this->load->view('user/partial/footer');
         } else {
             $result = $this->login->validate('seeker', $this->input->post());
@@ -82,7 +84,7 @@ class Login extends CI_Controller
                 $data['error'] = $error;
                 $data['title'] = 'Complete';
                 $this->load->view('user/partial/header', $data);
-                $this->load->view('user/login_view');
+                $this->load->view('user/login_view', $data );
                 $this->load->view('user/partial/footer');
             }
         }
