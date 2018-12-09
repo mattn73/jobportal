@@ -31,13 +31,3 @@
 <?php endforeach; ?>
 
 
-if (appointement[0].status == 2) {
-
-appointBody = appointBody + "<i class='far fa-check-circle' style='color: #008000;'></i>";
-} else if (appointement[0].status == 1) {
-
-appointBody = appointBody + "<i class='fas fa-exclamation-circle' style='color: #eaba02cf'></i>";
-} else {
-
-appointBody = appointBody + "<i class='far fa-times-circle' style='color: #008000;'></i>";
-}
