@@ -80,7 +80,10 @@ class Login extends CI_Controller
                 $error->class = 'alert-danger';
                 $error->msg = 'Wrong username or password';
                 $data['error'] = $error;
-                $this->load->view('company/login_view', $data);
+                $data['title'] = 'Complete';
+                $this->load->view('user/partial/header', $data);
+                $this->load->view('user/complete', $data);
+                $this->load->view('user/partial/footer');
             }
         }
     }
