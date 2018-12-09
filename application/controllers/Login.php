@@ -82,7 +82,7 @@ class Login extends CI_Controller
                 $data['error'] = $error;
                 $data['title'] = 'Complete';
                 $this->load->view('user/partial/header', $data);
-                $this->load->view('user/complete', $data);
+                $this->load->view('user/login_view');
                 $this->load->view('user/partial/footer');
             }
         }
