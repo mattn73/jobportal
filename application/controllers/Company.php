@@ -57,8 +57,15 @@ class Company extends MY_Controller {
         }
     }
 
-    public function view_application() {
-        
+    public function change_application_status($job_id = 0, $application_id = 0, $status = 'Viewed') {
+        if ($job_id) {
+            if ($this->company->change_application_status($application_id, $status))
+                redirect(base_url() . 'company/applications/' . $job_id);
+            else
+                echo 'Something went wrong, please contact site admin.';
+        } else {
+            show_404();
+        }
     }
 
     public function jobs() {

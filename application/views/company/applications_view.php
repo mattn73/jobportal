@@ -31,7 +31,7 @@
                                                 <td><?= $application->email ?></td>
                                                 <td>
                                                     <?php if ($application->cv) : ?>
-                                                        <a id="view_cv" href="<?= base_url() . $application->cv_path ?>">view</a>
+                                                        <a id="view_cv" data-app-id="<?= $application->app_id ?>" data-app-job="<?= $application->job ?>" href="<?= base_url() . $application->cv_path ?>">view</a>
                                                     <?php else : ?>
                                                         --
                                                     <?php endif; ?>
@@ -40,11 +40,11 @@
                                                     <?= $application->status ?>
                                                 </td>
                                                 <td>
-                                                    <a href="<?= base_url() ?>company/application_status/Accepted" class="btn btn-primary btn-xs">
-                                                        <i class="fa fa-pencil"></i>
+                                                    <a href="<?= base_url() ?>company/change_application_status/<?= $application->job ?>/<?= $application->app_id ?>/Accepted" class="btn btn-primary btn-xs">
+                                                        <i class="fa fa-check"></i>
                                                     </a>
-                                                    <a href="<?= base_url() ?>company/application_status/Rejected" class="btn btn-danger btn-xs">
-                                                        <i class="fa fa-trash-o "></i>
+                                                    <a href="<?= base_url() ?>company/change_application_status/<?= $application->job ?>/<?= $application->app_id ?>/Rejected" class="btn btn-danger btn-xs">
+                                                        <i class="fa fa-close "></i>
                                                     </a>
 
                                                 </td>
@@ -63,8 +63,9 @@
 <!-- end page content -->
 <script>
     $('#view_cv').click(function () {
-        $.get("<?= base_url()?>company/application_status", function (data, status) {
+        $.get("<?= base_url() ?>company/change_application_status/" + $(this).attr('data-app-job') + '/' + $(this).attr('data-app-id') + '/' + 'Viewed', function (data, status) {
             console.log('Status Changed!');
         });
+        return false;
     });
 </script>

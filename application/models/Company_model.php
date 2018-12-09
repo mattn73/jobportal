@@ -111,7 +111,7 @@ skill.name like ?";
 
     public function get_applications($job_id) {
         $company_id = $this->session->userdata('company_id');
-        $sql = "select * 
+        $sql = "select application.id as app_id,application.*,seeker.*
 from application,seeker,job
 where application.seeker = seeker.id and application.job = job.id and 
 application.job = ? and job.company_id = ? ";
@@ -122,6 +122,17 @@ application.job = ? and job.company_id = ? ";
             return $query->result();
         }
         return false;
+    }
+
+    public function change_application_status($application_id, $status) {
+
+        $data = array(
+            'status' => $status,
+        );
+        $this->db->where('id', $application_id);
+        $this->db->where('status', 'New');
+        $this->db->or_where('status', 'Viewed');
+        return $this->db->update('application', $data);
     }
 
 }
