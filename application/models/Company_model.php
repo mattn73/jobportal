@@ -125,10 +125,17 @@ application.job = ? and job.company_id = ? ";
     }
 
     public function change_application_status($application_id, $status) {
+        if ($status == 'Rejected' || $status == 'Approved') {
+            $data = array(
+                'status' => $status,
+            );
+        } else {
+            $data = array(
+                'status' => $status,
+            );
+        }
 
-        $data = array(
-            'status' => $status,
-        );
+
         $this->db->where('id', $application_id);
         $this->db->where('status', 'New');
         $this->db->or_where('status', 'Viewed');
