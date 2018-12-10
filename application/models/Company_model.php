@@ -128,6 +128,7 @@ application.job = ? and job.company_id = ? ";
         if ($status == 'Rejected' || $status == 'Approved') {
             $data = array(
                 'status' => $status,
+                'client_status' => 'New',
             );
         } else {
             $data = array(

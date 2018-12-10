@@ -7,7 +7,7 @@
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Kardia Doctors</title>
+        <title>Job Portal</title>
         <!-- google font -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
         <!-- icons -->

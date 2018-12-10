@@ -23,12 +23,12 @@
                 <?php if ($job->client_status == 'New'): ?> <span class="news-bagde">New</span> <?php endif; ?> <i class='icon-status fas fa-exclamation-circle' style='color: #eaba02cf'></i>
                 <?php elseif ($job->status == 'Accepted'): ?>
 
-                    <i class='icon-status far fa-check-circle' style='color: #008000;'></i>
+                   <?php if ($job->client_status == 'New'): ?> <span class="news-bagde">New</span> <?php endif; ?> <i class='icon-status far fa-check-circle' style='color: #008000;'></i>
 
                 <?php else: ?>
 
 
-                    <i class='icon-status far fa-times-circle' style='color: #c5151b;'></i>
+                    <?php if ($job->client_status == 'New'): ?> <span class="news-bagde">New</span> <?php endif; ?><i class='icon-status far fa-times-circle' style='color: #c5151b;'></i>
 
                 <?php endif; ?>
                 <h6 class="card-subtitle mb-2 text-muted"><?= $job->name ?></h6>
