@@ -17,13 +17,14 @@ class Logout extends CI_Controller {
         $company_id = $this->session->userdata('company_id');
         $this->load->model('seeker_model', 'seeker');
 
-        if( $company_id == null ){
 
-            $this->seeker->removehashcompany();
+        if( $company_id != null ){
+
+            $this->seeker->removehashcompany($company_id);
 
         } else {
-
-            $this->seeker->removehashseeker();
+            $id = $this->session->userdata('seeker_id');
+            $this->seeker->removehashseeker($id);
 
         }
         $this->session->sess_destroy();
