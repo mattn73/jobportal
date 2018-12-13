@@ -182,9 +182,24 @@ class Seeker_model extends CI_Model
 
     }
 
-    public function addHash($type){
+    public function removehashcompany($id){
 
 
+        $this->db->set('hash', null);
+        $this->db->where('id', $id);
+        $this->db->update('company');
+        return true;
+
+    }
+
+
+    public function removehashseeker($id){
+
+
+        $this->db->set('hash', null);
+        $this->db->where('id', $id);
+        $this->db->update('seeker');
+        return true;
 
     }
 

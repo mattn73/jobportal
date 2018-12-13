@@ -10,6 +10,7 @@ class MY_Controller extends CI_Controller
 
 
         $is_logged_in = $this->session->userdata('is_logged_in');
+        $company_id = $this->session->userdata('company_id');
         if (!$is_logged_in) {
             $type = $this->uri->segment(1);
             $arg['message'] = "Unauthorize Access";
@@ -23,6 +24,26 @@ class MY_Controller extends CI_Controller
             } else {
                 redirect(base_url() . 'login/');
             }
+        }
+
+        if($company_id != null){
+
+            $type = $this->uri->segment(1);
+
+            if($type != 'company'){
+
+                redirect(base_url() . '/company/profile');
+            }
+
+        } else {
+
+            $type = $this->uri->segment(1);
+
+            if($type == 'company'){
+
+                redirect(base_url() . '/page/forbidden');
+            }
+
         }
     }
 
