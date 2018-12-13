@@ -54,8 +54,8 @@
                         </button>
                     </div>
                     <div class="text-center p-t-30">
-                        <a class="txt1" href="forgot_password.html">
-                            Forgot Password?
+                        <a class="txt1" href="/signup/company/">
+                            Create an account?
                         </a>
                     </div>
                     <div class="text-center p-t-30">

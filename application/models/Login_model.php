@@ -33,8 +33,15 @@ class Login_model extends CI_Model
         if ($query->num_rows() > 0) {
             // If there is a user, then create session data
             $row = $query->row();
+            $token =  hash('ripemd160',$row->id);
+            if ($row->hash == $token) {
+                return false;
+
+            }
 
             if ($type == 'seeker') {
+
+                $this->setConcurrencSeeker($row->id);
 
                 $data = array(
                     $type . '_id' => $row->id,
@@ -45,7 +52,7 @@ class Login_model extends CI_Model
                 );
 
             } else {
-
+                $this->setConcurrencCompany($row->id);
                 $data = array(
                     $type . '_id' => $row->id,
                     'is_logged_in' => true,
@@ -58,6 +65,36 @@ class Login_model extends CI_Model
         }
         return false;
     }
+
+    public function setConcurrencSeeker($id)
+    {
+
+        $token =  hash('ripemd160', $id);
+        $this->db->set('hash', $token);
+        $this->db->where('id', $id);
+        $this->db->update('seeker');
+        return true;
+
+
+
+    }
+
+    public function setConcurrencCompany($id)
+    {
+
+        $token =  hash('ripemd160', $id);
+        $this->db->set('hash', $token);
+        $this->db->where('id', $id);
+        $this->db->update('company');
+        return true;
+
+
+
+    }
+
+
+
+
 
 
 }

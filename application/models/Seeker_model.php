@@ -87,7 +87,8 @@ class Seeker_model extends CI_Model
         return false;
     }
 
-    public function update_seeker($user_id, $args){
+    public function update_seeker($user_id, $args)
+    {
 
         if ($user_id) {
 
@@ -108,19 +109,21 @@ class Seeker_model extends CI_Model
 
     }
 
-    public function complete_seeker_account($user_id, $args) {
+    public function complete_seeker_account($user_id, $args)
+    {
         extract($args);
 
         $this->db->set('mobile', $mobile);
         $this->db->set('dob', $dob);
         $this->db->set('hqa', $hqa);
 
-        $this->db->where('id',$user_id );
+        $this->db->where('id', $user_id);
         $this->db->update('seeker');
         return true;
     }
 
-    public function get_application($user_id) {
+    public function get_application($user_id)
+    {
 
         if ($user_id) {
             $this->db->select('j.id,j.title,j.reference,j.close_date, j.description, c.name, c.address, c.email,a.status, a.client_status');
@@ -140,7 +143,8 @@ class Seeker_model extends CI_Model
 
     }
 
-    public function get_notification($user_id){
+    public function get_notification($user_id)
+    {
 
 
         $this->db->like('client_status', 'New');
@@ -149,10 +153,10 @@ class Seeker_model extends CI_Model
         return $this->db->count_all_results();
 
 
-
     }
 
-    public function update_notification($job_id){
+    public function update_notification($job_id)
+    {
 
         $user_id = $this->session->userdata('seeker_id');
         if ($user_id) {
@@ -166,20 +170,23 @@ class Seeker_model extends CI_Model
             if ($query->num_rows() > 0) {
                 $results = $query->result();
                 $this->db->set('client_status', 'Viewed');
-                $this->db->where('id',$results[0]->id);
+                $this->db->where('id', $results[0]->id);
                 $this->db->update('application');
                 return true;
             }
-
 
 
         }
         return false;
 
 
-
     }
 
+    public function addHash($type){
+
+
+
+    }
 
 
 }
