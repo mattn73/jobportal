@@ -31,12 +31,7 @@
                         <span class="title">Jobs</span>
                     </a>
                 </li>
-                <li class="nav-item start">
-                    <a href="<?php echo base_url() ?>company/applications" class="nav-link nav-toggle">
-                        <i class="material-icons">file_copy</i>
-                        <span class="title">Applications</span>
-                    </a>
-                </li>
+
                 <li class="nav-item start">
                     <a href="<?php echo base_url() ?>company/candidates" class="nav-link nav-toggle">
                         <i class="material-icons">group</i>

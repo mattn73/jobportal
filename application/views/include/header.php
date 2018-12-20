@@ -77,10 +77,12 @@
                     <div class="top-menu">
                         <ul class="nav navbar-nav pull-right">
                             <!-- start language menu -->
-                            <!--                            <li class="dropdown language-switch">
-                                                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <img src="<?= base_url() ?>assets/img/flags/gb.png" class="position-left" alt=""> English <span class="fa fa-angle-down"></span>
-                                                            </a>
-                                                            <ul class="dropdown-menu">
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                         <li class="dropdown language-switch">
+                                                            
+                                                             <a href="/logout" class="btn btn-primary x-small" >Logout </a>
+                                                            
+                                                            <!-- <ul class="dropdown-menu">
                                                                 <li>
                                                                     <a class="deutsch"><img src="<?= base_url() ?>assets/img/flags/de.png" alt=""> Deutsch</a>
                                                                 </li>
@@ -96,8 +98,8 @@
                                                                 <li>
                                                                     <a class="russian"><img src="<?= base_url() ?>assets/img/flags/ru.png" alt=""> ???????</a>
                                                                 </li>
-                                                            </ul>
-                                                        </li>-->
+                                                            </ul> -->
+                                                        </li></a>
                             <!-- end language menu -->
                             <!-- start notification dropdown -->
 
